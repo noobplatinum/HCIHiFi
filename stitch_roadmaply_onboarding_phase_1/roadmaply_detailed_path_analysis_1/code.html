@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Streamlined Detailed Path Analysis</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#0f4c81", // Classic Blue / Navy
+                        "primary-light": "#5b9bd5", // Medium Blue
+                        "primary-lighter": "#bfdbfe", // Light Blue
+                        "primary-content": "#ffffff",
+                        "background-light": "#f0f4f8",
+                        "background-dark": "#0d1b2a",
+                        secondary: "#4a5568",
+                    },
+                    fontFamily: {
+                        display: ["Manrope", "sans-serif"],
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .checkbox-custom:checked {
+            background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e");
+            background-color: #0f4c81; 
+            border-color: #0f4c81;
+        }.checkbox-custom:not(:checked) {
+            border-color: #cbd5e1;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display antialiased min-h-screen flex flex-col">
+<header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-[#15202b] px-6 lg:px-10 py-3 shadow-sm">
+<div class="flex items-center gap-4">
+<div class="size-8 text-primary">
+<span class="material-symbols-outlined text-3xl">hub</span>
+</div>
+<h2 class="text-xl font-bold leading-tight tracking-tight text-slate-800 dark:text-white">Roadmaply</h2>
+</div>
+<div class="hidden lg:flex flex-1 justify-end gap-8 items-center">
+<nav class="flex items-center gap-6">
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary-light text-sm font-medium transition-colors" href="#">Dashboard</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary-light text-sm font-medium transition-colors" href="#">Career Explorer</a>
+<a class="text-primary dark:text-primary-light text-sm font-bold" href="#">My Skills</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary-light text-sm font-medium transition-colors" href="#">Community</a>
+</nav>
+<div class="h-6 w-px bg-slate-200 dark:bg-slate-700"></div>
+<div class="flex items-center gap-4">
+<button class="flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">
+<div class="size-9 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden relative">
+<img alt="User Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfkM5_Tpy86WXVVvQqlaDiiUHZLh3XKdpESQzbLEydfLT7WH-l2N8ygwWdZXCsh6qGZXyKXF1Ai8mgQYlj_9qQUZihqTlBLYfTPPAbNd18dVYfnPq1E-3W6m4Uu4ieVTPpaos8ZaN_UUio8PhN4x8qu-tLLcKM2OzIlY75RhQOVZnStONxVG9FsisGNUcJgUUsLVPZdo5vZ1lM9kdgsYKgSZKEvVLisgxyE33ah7EmMFR7uWpWrOFnBTta-ZzlVfVmvgBAhvDwyZgA"/>
+</div>
+</button>
+<button class="flex items-center justify-center rounded-lg h-9 px-4 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-900 dark:text-slate-100 text-sm font-bold transition-colors">
+                Sign Out
+            </button>
+</div>
+</div>
+<button class="lg:hidden text-slate-900 dark:text-white">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</header>
+<main class="flex-1 flex flex-col items-center py-8 px-4 sm:px-6 lg:px-8 w-full max-w-7xl mx-auto">
+<div class="w-full mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div class="flex flex-col gap-2 max-w-2xl">
+<div class="flex items-center gap-2 mb-1">
+<span class="px-2 py-0.5 rounded text-xs font-semibold bg-primary/10 text-primary dark:text-primary-light uppercase tracking-wider">Analysis Complete</span>
+</div>
+<h1 class="text-3xl md:text-4xl font-black leading-tight tracking-tight text-slate-900 dark:text-white">AI Career Path Analysis</h1>
+<p class="text-secondary dark:text-slate-400 text-base md:text-lg">
+                We found 3 potential career paths based on your current skills and interests.
+            </p>
+</div>
+<div class="flex items-center gap-3">
+<button class="flex items-center gap-2 px-4 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary-light border border-slate-200 dark:border-slate-700 rounded-lg bg-white dark:bg-[#15202b] shadow-sm">
+<span class="material-symbols-outlined text-lg">tune</span>
+                Adjust Inputs
+            </button>
+<button class="flex items-center gap-2 px-4 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary-light border border-slate-200 dark:border-slate-700 rounded-lg bg-white dark:bg-[#15202b] shadow-sm">
+<span class="material-symbols-outlined text-lg">download</span>
+                Export PDF
+            </button>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 w-full">
+<article class="flex flex-col bg-white dark:bg-[#15202b] rounded-xl shadow-md border-2 border-primary/60 dark:border-primary/40 relative overflow-hidden group hover:shadow-xl hover:border-primary transition-all duration-300">
+<div class="absolute top-0 left-0 w-full h-1.5 bg-primary"></div>
+<div class="absolute top-4 right-4 bg-primary text-white text-xs font-bold px-3 py-1 rounded-full shadow-sm">
+                95% Match
+            </div>
+<div class="p-6 pb-4 border-b border-slate-100 dark:border-slate-800">
+<div class="text-sm text-primary dark:text-primary-light font-bold mb-1 uppercase tracking-wider">Primary Match</div>
+<h3 class="text-2xl font-bold text-slate-900 dark:text-white leading-tight mb-2">Data Scientist</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400 line-clamp-2">Leverage your statistical background to extract insights from structured and unstructured data.</p>
+</div>
+<div class="p-6 flex-1 flex flex-col gap-6">
+<div class="grid grid-cols-2 gap-4">
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="text-xs font-semibold text-slate-500 dark:text-slate-400">Difficulty</span>
+<button class="text-slate-400 hover:text-primary"><span class="material-symbols-outlined text-[16px]">edit</span></button>
+</div>
+<div class="flex items-end gap-2">
+<span class="text-xl font-bold text-slate-900 dark:text-white">High</span>
+<div class="flex gap-0.5 mb-1.5">
+<div class="w-1.5 h-3 bg-primary rounded-sm"></div>
+<div class="w-1.5 h-3 bg-primary rounded-sm"></div>
+<div class="w-1.5 h-3 bg-primary rounded-sm"></div>
+<div class="w-1.5 h-3 bg-slate-200 dark:bg-slate-700 rounded-sm"></div>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="text-xs font-semibold text-slate-500 dark:text-slate-400">Competition</span>
+<button class="text-slate-400 hover:text-primary"><span class="material-symbols-outlined text-[16px]">edit</span></button>
+</div>
+<div class="flex items-end gap-2">
+<span class="text-xl font-bold text-slate-900 dark:text-white">Med</span>
+<div class="flex gap-0.5 mb-1.5">
+<div class="w-1.5 h-3 bg-primary/70 rounded-sm"></div>
+<div class="w-1.5 h-3 bg-primary/70 rounded-sm"></div>
+<div class="w-1.5 h-3 bg-slate-200 dark:bg-slate-700 rounded-sm"></div>
+<div class="w-1.5 h-3 bg-slate-200 dark:bg-slate-700 rounded-sm"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between items-center">
+<span class="text-sm font-semibold text-slate-700 dark:text-slate-300">Avg. Salary (IDR)</span>
+<button class="text-slate-400 hover:text-primary"><span class="material-symbols-outlined text-[16px]">edit</span></button>
+</div>
+<div class="relative h-3 w-full bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden">
+<div class="absolute top-0 left-0 h-full w-[85%] bg-primary rounded-full"></div>
+</div>
+<div class="flex justify-between text-xs text-slate-500">
+<span>15M</span>
+<span class="font-bold text-slate-900 dark:text-white">35M/mo</span>
+<span>50M+</span>
+</div>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-center mb-3">
+<span class="text-sm font-semibold text-slate-700 dark:text-slate-300">Skill Gap Analysis</span>
+<span class="text-xs text-primary font-medium">3 Skills Missing</span>
+</div>
+<div class="space-y-2">
+<label class="flex items-start gap-3 p-2 rounded-lg bg-slate-50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer group/check">
+<input checked="" class="mt-0.5 h-4 w-4 rounded border-slate-300 text-primary focus:ring-primary checkbox-custom" type="checkbox"/>
+<div class="flex-1">
+<p class="text-sm font-medium text-slate-900 dark:text-slate-200 line-through decoration-slate-400 text-slate-400">Python &amp; SQL</p>
+</div>
+</label>
+<label class="flex items-start gap-3 p-2 rounded-lg bg-slate-50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer group/check">
+<input class="mt-0.5 h-4 w-4 rounded border-slate-300 text-primary focus:ring-primary checkbox-custom" type="checkbox"/>
+<div class="flex-1">
+<p class="text-sm font-medium text-slate-500 dark:text-slate-400">Deep Learning (PyTorch)</p>
+<p class="text-xs text-slate-400 mt-0.5">Recommended Course: 4 weeks</p>
+</div>
+<button class="opacity-0 group-hover/check:opacity-100 text-slate-400 hover:text-primary"><span class="material-symbols-outlined text-[18px]">info</span></button>
+</label>
+<label class="flex items-start gap-3 p-2 rounded-lg bg-slate-50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer group/check">
+<input class="mt-0.5 h-4 w-4 rounded border-slate-300 text-primary focus:ring-primary checkbox-custom" type="checkbox"/>
+<div class="flex-1">
+<p class="text-sm font-medium text-slate-500 dark:text-slate-400">MLOps Deployment</p>
+</div>
+<button class="opacity-0 group-hover/check:opacity-100 text-slate-400 hover:text-primary"><span class="material-symbols-outlined text-[18px]">info</span></button>
+</label>
+</div>
+</div>
+<button class="w-full mt-auto bg-primary hover:bg-sky-800 text-white font-bold py-3 px-4 rounded-lg shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2">
+                    Select This Roadmap
+                    <span class="material-symbols-outlined text-lg">arrow_forward</span>
+</button>
+</div>
+</article>
+<article class="flex flex-col bg-white dark:bg-[#15202b] rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 relative overflow-hidden group hover:shadow-lg transition-all duration-300">
+<div class="absolute top-4 right-4 bg-slate-100 dark:bg-slate-800 text-primary-light dark:text-primary-light text-xs font-bold px-3 py-1 rounded-full border border-primary-light/20">
+                88% Match
+            </div>
+<div class="p-6 pb-4 border-b border-slate-100 dark:border-slate-800">
+<div class="text-sm text-primary-light font-bold mb-1 uppercase tracking-wider">Alternative Path</div>
+<h3 class="text-2xl font-bold text-slate-900 dark:text-white leading-tight mb-2">ML Engineer</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400 line-clamp-2">Focus on the engineering and deployment aspects of machine learning models.</p>
+</div>
+<div class="p-6 flex-1 flex flex-col gap-6">
+<div class="grid grid-cols-2 gap-4">
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="text-xs font-semibold text-slate-500 dark:text-slate-400">Difficulty</span>
+<button class="text-slate-400 hover:text-primary"><span class="material-symbols-outlined text-[16px]">edit</span></button>
+</div>
+<div class="flex items-end gap-2">
+<span class="text-xl font-bold text-slate-900 dark:text-white">Med</span>
+<div class="flex gap-0.5 mb-1.5">
+<div class="w-1.5 h-3 bg-primary-light rounded-sm"></div>
+<div class="w-1.5 h-3 bg-primary-light rounded-sm"></div>
+<div class="w-1.5 h-3 bg-slate-200 dark:bg-slate-700 rounded-sm"></div>
+<div class="w-1.5 h-3 bg-slate-200 dark:bg-slate-700 rounded-sm"></div>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="text-xs font-semibold text-slate-500 dark:text-slate-400">Competition</span>
+<button class="text-slate-400 hover:text-primary"><span class="material-symbols-outlined text-[16px]">edit</span></button>
+</div>
+<div class="flex items-end gap-2">
+<span class="text-xl font-bold text-slate-900 dark:text-white">Low</span>
+<div class="flex gap-0.5 mb-1.5">
+<div class="w-1.5 h-3 bg-primary-light/60 rounded-sm"></div>
+<div class="w-1.5 h-3 bg-slate-200 dark:bg-slate-700 rounded-sm"></div>
+<div class="w-1.5 h-3 bg-slate-200 dark:bg-slate-700 rounded-sm"></div>
+<div class="w-1.5 h-3 bg-slate-200 dark:bg-slate-700 rounded-sm"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between items-center">
+<span class="text-sm font-semibold text-slate-700 dark:text-slate-300">Avg. Salary (IDR)</span>
+<button class="text-slate-400 hover:text-primary"><span class="material-symbols-outlined text-[16px]">edit</span></button>
+</div>
+<div class="relative h-3 w-full bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden">
+<div class="absolute top-0 left-0 h-full w-[70%] bg-primary-light rounded-full"></div>
+</div>
+<div class="flex justify-between text-xs text-slate-500">
+<span>15M</span>
+<span class="font-bold text-slate-900 dark:text-white">28M/mo</span>
+<span>50M+</span>
+</div>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-center mb-3">
+<span class="text-sm font-semibold text-slate-700 dark:text-slate-300">Skill Gap Analysis</span>
+<span class="text-xs text-primary-light font-medium">4 Skills Missing</span>
+</div>
+<div class="space-y-2">
+<label class="flex items-start gap-3 p-2 rounded-lg bg-slate-50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer group/check">
+<input checked="" class="mt-0.5 h-4 w-4 rounded border-slate-300 text-primary-light focus:ring-primary-light checkbox-custom" type="checkbox"/>
+<div class="flex-1">
+<p class="text-sm font-medium text-slate-900 dark:text-slate-200 line-through decoration-slate-400 text-slate-400">Python</p>
+</div>
+</label>
+<label class="flex items-start gap-3 p-2 rounded-lg bg-slate-50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer group/check">
+<input class="mt-0.5 h-4 w-4 rounded border-slate-300 text-primary-light focus:ring-primary-light checkbox-custom" type="checkbox"/>
+<div class="flex-1">
+<p class="text-sm font-medium text-slate-500 dark:text-slate-400">System Design</p>
+<p class="text-xs text-slate-400 mt-0.5">High Priority</p>
+</div>
+<button class="opacity-0 group-hover/check:opacity-100 text-slate-400 hover:text-primary"><span class="material-symbols-outlined text-[18px]">info</span></button>
+</label>
+<label class="flex items-start gap-3 p-2 rounded-lg bg-slate-50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer group/check">
+<input class="mt-0.5 h-4 w-4 rounded border-slate-300 text-primary-light focus:ring-primary-light checkbox-custom" type="checkbox"/>
+<div class="flex-1">
+<p class="text-sm font-medium text-slate-500 dark:text-slate-400">Docker &amp; Kubernetes</p>
+</div>
+<button class="opacity-0 group-hover/check:opacity-100 text-slate-400 hover:text-primary"><span class="material-symbols-outlined text-[18px]">info</span></button>
+</label>
+</div>
+</div>
+<button class="w-full mt-auto bg-slate-800 dark:bg-slate-700 hover:bg-slate-700 dark:hover:bg-slate-600 text-white font-bold py-3 px-4 rounded-lg shadow-sm transition-all flex items-center justify-center gap-2">
+                    Select This Roadmap
+                </button>
+</div>
+</article>
+<article class="flex flex-col bg-white dark:bg-[#15202b] rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 relative overflow-hidden group hover:shadow-lg transition-all duration-300 opacity-95">
+<div class="absolute top-4 right-4 bg-slate-100 dark:bg-slate-800 text-primary-light/80 dark:text-primary-lighter text-xs font-bold px-3 py-1 rounded-full border border-primary-light/20">
+                72% Match
+            </div>
+<div class="p-6 pb-4 border-b border-slate-100 dark:border-slate-800">
+<div class="text-sm text-primary-light/80 dark:text-primary-lighter font-bold mb-1 uppercase tracking-wider">Stretch Goal</div>
+<h3 class="text-2xl font-bold text-slate-900 dark:text-white leading-tight mb-2">AI Researcher</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400 line-clamp-2">Advance the field of AI through rigorous academic research and experimentation.</p>
+</div>
+<div class="p-6 flex-1 flex flex-col gap-6">
+<div class="grid grid-cols-2 gap-4">
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="text-xs font-semibold text-slate-500 dark:text-slate-400">Difficulty</span>
+<button class="text-slate-400 hover:text-primary"><span class="material-symbols-outlined text-[16px]">edit</span></button>
+</div>
+<div class="flex items-end gap-2">
+<span class="text-xl font-bold text-slate-900 dark:text-white">V. High</span>
+<div class="flex gap-0.5 mb-1.5">
+<div class="w-1.5 h-3 bg-primary-lighter dark:bg-primary-light rounded-sm"></div>
+<div class="w-1.5 h-3 bg-primary-lighter dark:bg-primary-light rounded-sm"></div>
+<div class="w-1.5 h-3 bg-primary-lighter dark:bg-primary-light rounded-sm"></div>
+<div class="w-1.5 h-3 bg-primary-lighter dark:bg-primary-light rounded-sm"></div>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="text-xs font-semibold text-slate-500 dark:text-slate-400">Competition</span>
+<button class="text-slate-400 hover:text-primary"><span class="material-symbols-outlined text-[16px]">edit</span></button>
+</div>
+<div class="flex items-end gap-2">
+<span class="text-xl font-bold text-slate-900 dark:text-white">High</span>
+<div class="flex gap-0.5 mb-1.5">
+<div class="w-1.5 h-3 bg-primary-lighter dark:bg-primary-light/80 rounded-sm"></div>
+<div class="w-1.5 h-3 bg-primary-lighter dark:bg-primary-light/80 rounded-sm"></div>
+<div class="w-1.5 h-3 bg-primary-lighter dark:bg-primary-light/80 rounded-sm"></div>
+<div class="w-1.5 h-3 bg-slate-200 dark:bg-slate-700 rounded-sm"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between items-center">
+<span class="text-sm font-semibold text-slate-700 dark:text-slate-300">Avg. Salary (IDR)</span>
+<button class="text-slate-400 hover:text-primary"><span class="material-symbols-outlined text-[16px]">edit</span></button>
+</div>
+<div class="relative h-3 w-full bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden">
+<div class="absolute top-0 left-0 h-full w-[95%] bg-primary-lighter dark:bg-primary-light rounded-full"></div>
+</div>
+<div class="flex justify-between text-xs text-slate-500">
+<span>15M</span>
+<span class="font-bold text-slate-900 dark:text-white">45M+/mo</span>
+<span>50M+</span>
+</div>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-center mb-3">
+<span class="text-sm font-semibold text-slate-700 dark:text-slate-300">Skill Gap Analysis</span>
+<span class="text-xs text-primary-light/80 font-medium">5+ Skills Missing</span>
+</div>
+<div class="space-y-2">
+<label class="flex items-start gap-3 p-2 rounded-lg bg-slate-50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer group/check">
+<input checked="" class="mt-0.5 h-4 w-4 rounded border-slate-300 text-primary-lighter focus:ring-primary-lighter checkbox-custom" type="checkbox"/>
+<div class="flex-1">
+<p class="text-sm font-medium text-slate-900 dark:text-slate-200 line-through decoration-slate-400 text-slate-400">Statistics</p>
+</div>
+</label>
+<label class="flex items-start gap-3 p-2 rounded-lg bg-slate-50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer group/check">
+<input class="mt-0.5 h-4 w-4 rounded border-slate-300 text-primary-lighter focus:ring-primary-lighter checkbox-custom" type="checkbox"/>
+<div class="flex-1">
+<p class="text-sm font-medium text-slate-500 dark:text-slate-400">PhD / Advanced Math</p>
+<p class="text-xs text-slate-400 mt-0.5">Critical Requirement</p>
+</div>
+<button class="opacity-0 group-hover/check:opacity-100 text-slate-400 hover:text-primary"><span class="material-symbols-outlined text-[18px]">info</span></button>
+</label>
+<label class="flex items-start gap-3 p-2 rounded-lg bg-slate-50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer group/check">
+<input class="mt-0.5 h-4 w-4 rounded border-slate-300 text-primary-lighter focus:ring-primary-lighter checkbox-custom" type="checkbox"/>
+<div class="flex-1">
+<p class="text-sm font-medium text-slate-500 dark:text-slate-400">Academic Publishing</p>
+</div>
+<button class="opacity-0 group-hover/check:opacity-100 text-slate-400 hover:text-primary"><span class="material-symbols-outlined text-[18px]">info</span></button>
+</label>
+</div>
+</div>
+<button class="w-full mt-auto bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-600 hover:border-slate-300 dark:hover:border-slate-500 text-slate-700 dark:text-slate-200 font-bold py-3 px-4 rounded-lg shadow-sm transition-all flex items-center justify-center gap-2">
+                    Select This Roadmap
+                </button>
+</div>
+</article>
+</div>
+<div class="w-full mt-10 p-6 bg-slate-100 dark:bg-[#15202b] rounded-xl border border-slate-200 dark:border-slate-800 flex flex-col md:flex-row items-center gap-6">
+<div class="p-3 bg-white dark:bg-slate-800 rounded-full shadow-sm">
+<span class="material-symbols-outlined text-primary text-3xl">psychology</span>
+</div>
+<div class="flex-1">
+<h4 class="text-lg font-bold text-slate-900 dark:text-white">Why these recommendations?</h4>
+<p class="text-slate-600 dark:text-slate-400 mt-1">
+                Our AI analyzed your profile against 15,000+ job postings in the last 30 days. Your strong foundation in Python puts you in the top 10% of candidates for Data Science roles, but you have significant gaps for research-heavy positions.
+            </p>
+</div>
+<button class="whitespace-nowrap px-5 py-2.5 text-sm font-bold text-primary hover:text-white bg-white hover:bg-primary border border-slate-200 hover:border-primary dark:bg-slate-800 dark:text-white dark:hover:bg-primary-light transition-colors rounded-lg shadow-sm">
+            View Full Analysis Report
+        </button>
+</div>
+</main>
+
+</body></html>

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Roadmaply AI Profile Validation</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2563eb","primary-dark": "#1d4ed8",
+                        "primary-light": "#dbeafe",
+                        "background-light": "#f1f5f9","background-dark": "#0f172a","surface-light": "#ffffff",
+                        "surface-dark": "#1e293b","text-main": "#0f172a",
+                        "text-muted": "#64748b",
+                        "border-light": "#e2e8f0",
+                        "border-dark": "#334155"
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display transition-colors duration-200">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-border-light dark:border-border-dark bg-white dark:bg-surface-dark px-10 py-3 sticky top-0 z-50">
+<div class="flex items-center gap-4">
+<div class="size-8 text-primary">
+<svg class="w-full h-full" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M39.475 21.6262C40.358 21.4363 40.6863 21.5589 40.7581 21.5934C40.7876 21.655 40.8547 21.857 40.8082 22.3336C40.7408 23.0255 40.4502 24.0046 39.8572 25.2301C38.6799 27.6631 36.5085 30.6631 33.5858 33.5858C30.6631 36.5085 27.6632 38.6799 25.2301 39.8572C24.0046 40.4502 23.0255 40.7407 22.3336 40.8082C21.8571 40.8547 21.6551 40.7875 21.5934 40.7581C21.5589 40.6863 21.4363 40.358 21.6262 39.475C21.8562 38.4054 22.4689 36.9657 23.5038 35.2817C24.7575 33.2417 26.5497 30.9744 28.7621 28.762C30.9744 26.5497 33.2417 24.7574 35.2817 23.5037C36.9657 22.4689 38.4054 21.8562 39.475 21.6262ZM4.41189 29.2403L18.7597 43.5881C19.8813 44.7097 21.4027 44.9179 22.7217 44.7893C24.0585 44.659 25.5148 44.1631 26.9723 43.4579C29.9052 42.0387 33.2618 39.5667 36.4142 36.4142C39.5667 33.2618 42.0387 29.9052 43.4579 26.9723C44.1631 25.5148 44.659 24.0585 44.7893 22.7217C44.9179 21.4027 44.7097 19.8813 43.5881 18.7597L29.2403 4.41187C27.8527 3.02428 25.8765 3.02573 24.2861 3.36776C22.6081 3.72863 20.7334 4.58419 18.8396 5.74801C16.4978 7.18716 13.9881 9.18353 11.5858 11.5858C9.18354 13.988 7.18717 16.4978 5.74802 18.8396C4.58421 20.7334 3.72865 22.6081 3.36778 24.2861C3.02574 25.8765 3.02429 27.8527 4.41189 29.2403Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">Roadmaply</h2>
+</div>
+<div class="flex flex-1 justify-end gap-8">
+<nav class="hidden md:flex items-center gap-9">
+<a class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary text-sm font-medium leading-normal transition-colors" href="#">Dashboard</a>
+<a class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary text-sm font-medium leading-normal transition-colors" href="#">Career Paths</a>
+<a class="text-primary dark:text-primary text-sm font-bold leading-normal" href="#">Profile</a>
+<a class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary text-sm font-medium leading-normal transition-colors" href="#">Settings</a>
+</nav>
+<div class="flex gap-2">
+<button class="flex size-10 cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-slate-50 dark:bg-slate-700/50 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+</button>
+<button class="flex size-10 cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-slate-50 dark:bg-slate-700/50 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<main class="flex-1 flex justify-center py-10 px-4 sm:px-6 lg:px-8">
+<div class="w-full max-w-[1200px] flex flex-col lg:flex-row gap-8">
+<div class="flex-1 flex flex-col gap-8">
+<div class="flex flex-col gap-3">
+<h1 class="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">Verify Your Profile Details</h1>
+<p class="text-slate-500 dark:text-slate-400 text-lg max-w-2xl">Review the data parsed from your CV to ensure accurate roadmap generation. Your validation helps our AI tailor the best path for you.</p>
+</div>
+<section class="rounded-xl border border-border-light dark:border-border-dark bg-white dark:bg-surface-dark shadow-sm overflow-hidden">
+<div class="flex items-center justify-between px-6 py-4 border-b border-border-light dark:border-border-dark bg-slate-50/50 dark:bg-slate-800/30">
+<h2 class="text-lg font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">person</span>
+                            Personal Information
+                        </h2>
+<button class="text-sm font-semibold text-primary hover:text-primary-dark transition-colors">Edit</button>
+</div>
+<div class="p-6">
+<div class="flex flex-col md:flex-row gap-8 items-start">
+<div class="relative group">
+<div class="size-24 rounded-full bg-slate-100 dark:bg-slate-700 overflow-hidden ring-4 ring-slate-50 dark:ring-slate-800" data-alt="User profile picture placeholder">
+<img alt="Alex Johnson Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_fmSgnFeWZUCNfcCYo63VvpMcfhZMXCFgRXwzxSQ6wroKQgeq6wtBY0qfoZYM_6da7ImcydI6lAAx-C2xIiqB7TC7VXPdofMc9rwL8G-wmezUJes20-oaQJmAg5VQbSa96mh7prTPD5L-lMK_U0QSFYMgIIskxjQweyWgY9D4g6F1LitmoBUgcrTG-Bkiesy84twq5EiFh54J0d07gOoQn9ODXVVtv2E_7vkQncGecmad1Z8mbWOTnlJu5DUGWh_RQlqxyQ3f0e8U"/>
+</div>
+<button class="absolute bottom-0 right-0 p-1.5 bg-primary rounded-full text-white shadow-lg hover:bg-primary-dark transition-colors border-2 border-white dark:border-slate-800">
+<span class="material-symbols-outlined text-[16px]">edit</span>
+</button>
+</div>
+<div class="flex-1 grid grid-cols-1 md:grid-cols-2 gap-5 w-full">
+<div class="flex flex-col gap-1.5">
+<label class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Full Name</label>
+<input class="w-full bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2.5 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all" type="text" value="Alex Johnson"/>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Job Title</label>
+<input class="w-full bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2.5 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all" type="text" value="Senior Product Designer"/>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Email</label>
+<input class="w-full bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2.5 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all" type="email" value="alex.johnson@example.com"/>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Phone</label>
+<input class="w-full bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2.5 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all" type="tel" value="+1 (555) 123-4567"/>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="rounded-xl border border-border-light dark:border-border-dark bg-white dark:bg-surface-dark shadow-sm overflow-hidden">
+<div class="flex items-center justify-between px-6 py-4 border-b border-border-light dark:border-border-dark bg-slate-50/50 dark:bg-slate-800/30">
+<h2 class="text-lg font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">work</span>
+                            Work Experience
+                        </h2>
+<button class="flex items-center gap-1 text-sm font-semibold text-primary hover:text-primary-dark transition-colors">
+<span class="material-symbols-outlined text-[18px]">add</span> Add Role
+                        </button>
+</div>
+<div class="p-6 flex flex-col gap-6">
+<div class="flex gap-4 group">
+<div class="flex flex-col items-center">
+<div class="size-10 rounded-full bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center text-primary dark:text-blue-300 font-bold border border-blue-100 dark:border-blue-800/50">T</div>
+<div class="w-0.5 bg-slate-200 dark:bg-slate-800 h-full mt-2 group-last:hidden"></div>
+</div>
+<div class="flex-1 pb-6 group-last:pb-0">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between mb-2">
+<div>
+<h3 class="text-base font-bold text-slate-900 dark:text-white">Senior Product Designer</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400">TechFlow Inc. • San Francisco, CA</p>
+</div>
+<span class="text-xs font-semibold text-primary dark:text-blue-200 bg-blue-50 dark:bg-blue-900/30 px-3 py-1 rounded-full mt-2 sm:mt-0 w-fit border border-blue-100 dark:border-blue-800/50">2021 - Present</span>
+</div>
+<textarea class="w-full bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-700 dark:text-slate-300 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all resize-none min-h-[80px]">Led the redesign of the core product platform, resulting in a 25% increase in user engagement. Managed a team of 3 junior designers and established a new design system.</textarea>
+</div>
+</div>
+<div class="flex gap-4 group">
+<div class="flex flex-col items-center">
+<div class="size-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-500 dark:text-slate-400 font-bold border border-slate-200 dark:border-slate-700">C</div>
+<div class="w-0.5 bg-slate-200 dark:bg-slate-800 h-full mt-2 group-last:hidden"></div>
+</div>
+<div class="flex-1 pb-6 group-last:pb-0">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between mb-2">
+<div>
+<h3 class="text-base font-bold text-slate-900 dark:text-white">Product Designer</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400">Creative Solutions • Austin, TX</p>
+</div>
+<span class="text-xs font-semibold text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-3 py-1 rounded-full mt-2 sm:mt-0 w-fit border border-slate-200 dark:border-slate-700">2018 - 2021</span>
+</div>
+<textarea class="w-full bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-700 dark:text-slate-300 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all resize-none min-h-[80px]">Collaborated with cross-functional teams to ship features for the mobile app. Conducted user research and usability testing to inform design decisions.</textarea>
+</div>
+</div>
+</div>
+</section>
+<section class="rounded-xl border border-border-light dark:border-border-dark bg-white dark:bg-surface-dark shadow-sm overflow-hidden">
+<div class="flex items-center justify-between px-6 py-4 border-b border-border-light dark:border-border-dark bg-slate-50/50 dark:bg-slate-800/30">
+<h2 class="text-lg font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">school</span>
+                            Education
+                        </h2>
+<button class="flex items-center gap-1 text-sm font-semibold text-primary hover:text-primary-dark transition-colors">
+<span class="material-symbols-outlined text-[18px]">add</span> Add Education
+                        </button>
+</div>
+<div class="p-6">
+<div class="flex gap-4">
+<div class="size-12 rounded bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center border border-blue-100 dark:border-blue-800/50">
+<span class="material-symbols-outlined text-primary dark:text-blue-300 text-[24px]">account_balance</span>
+</div>
+<div class="flex-1">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between mb-1">
+<h3 class="text-base font-bold text-slate-900 dark:text-white">Bachelor of Fine Arts, Interaction Design</h3>
+<span class="text-sm font-medium text-slate-500 dark:text-slate-400">2014 - 2018</span>
+</div>
+<p class="text-sm text-slate-500 dark:text-slate-400 mb-2">California College of the Arts</p>
+</div>
+</div>
+</div>
+</section>
+<section class="rounded-xl border border-border-light dark:border-border-dark bg-white dark:bg-surface-dark shadow-sm overflow-hidden">
+<div class="flex items-center justify-between px-6 py-4 border-b border-border-light dark:border-border-dark bg-slate-50/50 dark:bg-slate-800/30">
+<h2 class="text-lg font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">psychology</span>
+                            Detected Skills
+                        </h2>
+<div class="flex items-center gap-2 text-xs text-primary bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-800 px-3 py-1 rounded-full font-bold">
+<span class="material-symbols-outlined text-[14px]">auto_awesome</span> AI Parsed
+                        </div>
+</div>
+<div class="p-6">
+<div class="mb-8">
+<h3 class="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-4 border-b border-slate-100 dark:border-slate-800 pb-2">Technical Skills</h3>
+<div class="flex flex-wrap gap-2.5">
+<div class="flex items-center gap-1.5 px-3 py-1.5 bg-white dark:bg-slate-800 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 shadow-sm hover:border-primary/50 hover:text-primary dark:hover:text-primary-light hover:shadow-md cursor-pointer group transition-all">
+                                    Figma
+                                    <span class="material-symbols-outlined text-[14px] text-slate-300 group-hover:text-red-400 transition-colors">close</span>
+</div>
+<div class="flex items-center gap-1.5 px-3 py-1.5 bg-white dark:bg-slate-800 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 shadow-sm hover:border-primary/50 hover:text-primary dark:hover:text-primary-light hover:shadow-md cursor-pointer group transition-all">
+                                    Adobe XD
+                                    <span class="material-symbols-outlined text-[14px] text-slate-300 group-hover:text-red-400 transition-colors">close</span>
+</div>
+<div class="flex items-center gap-1.5 px-3 py-1.5 bg-white dark:bg-slate-800 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 shadow-sm hover:border-primary/50 hover:text-primary dark:hover:text-primary-light hover:shadow-md cursor-pointer group transition-all">
+                                    HTML/CSS
+                                    <span class="material-symbols-outlined text-[14px] text-slate-300 group-hover:text-red-400 transition-colors">close</span>
+</div>
+<div class="flex items-center gap-1.5 px-3 py-1.5 bg-white dark:bg-slate-800 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 shadow-sm hover:border-primary/50 hover:text-primary dark:hover:text-primary-light hover:shadow-md cursor-pointer group transition-all">
+                                    Prototyping
+                                    <span class="material-symbols-outlined text-[14px] text-slate-300 group-hover:text-red-400 transition-colors">close</span>
+</div>
+<div class="flex items-center gap-1.5 px-3 py-1.5 bg-white dark:bg-slate-800 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 shadow-sm hover:border-primary/50 hover:text-primary dark:hover:text-primary-light hover:shadow-md cursor-pointer group transition-all">
+                                    User Research
+                                    <span class="material-symbols-outlined text-[14px] text-slate-300 group-hover:text-red-400 transition-colors">close</span>
+</div>
+<button class="flex items-center gap-1 px-3 py-1.5 bg-transparent border border-dashed border-slate-300 dark:border-slate-600 rounded-lg text-sm font-semibold text-slate-500 hover:text-primary hover:border-primary hover:bg-blue-50/50 dark:hover:bg-blue-900/10 transition-all">
+<span class="material-symbols-outlined text-[16px]">add</span> Add Skill
+                                </button>
+</div>
+</div>
+<div>
+<h3 class="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-4 border-b border-slate-100 dark:border-slate-800 pb-2">Soft Skills</h3>
+<div class="flex flex-wrap gap-2.5">
+<div class="flex items-center gap-1.5 px-3 py-1.5 bg-blue-50 dark:bg-blue-900/20 rounded-lg text-sm font-medium text-primary dark:text-blue-200 border border-blue-100 dark:border-blue-800/50 shadow-sm hover:border-blue-300 cursor-pointer group transition-all">
+                                    Leadership
+                                    <span class="material-symbols-outlined text-[14px] text-blue-300 group-hover:text-red-400 transition-colors">close</span>
+</div>
+<div class="flex items-center gap-1.5 px-3 py-1.5 bg-blue-50 dark:bg-blue-900/20 rounded-lg text-sm font-medium text-primary dark:text-blue-200 border border-blue-100 dark:border-blue-800/50 shadow-sm hover:border-blue-300 cursor-pointer group transition-all">
+                                    Communication
+                                    <span class="material-symbols-outlined text-[14px] text-blue-300 group-hover:text-red-400 transition-colors">close</span>
+</div>
+<div class="flex items-center gap-1.5 px-3 py-1.5 bg-blue-50 dark:bg-blue-900/20 rounded-lg text-sm font-medium text-primary dark:text-blue-200 border border-blue-100 dark:border-blue-800/50 shadow-sm hover:border-blue-300 cursor-pointer group transition-all">
+                                    Problem Solving
+                                    <span class="material-symbols-outlined text-[14px] text-blue-300 group-hover:text-red-400 transition-colors">close</span>
+</div>
+<button class="flex items-center gap-1 px-3 py-1.5 bg-transparent border border-dashed border-slate-300 dark:border-slate-600 rounded-lg text-sm font-semibold text-slate-500 hover:text-primary hover:border-primary hover:bg-blue-50/50 dark:hover:bg-blue-900/10 transition-all">
+<span class="material-symbols-outlined text-[16px]">add</span> Add Skill
+                                </button>
+</div>
+</div>
+</div>
+</section>
+</div>
+<aside class="w-full lg:w-80 flex flex-col gap-6 shrink-0">
+<div class="bg-white dark:bg-surface-dark rounded-xl border border-border-light dark:border-border-dark p-6 shadow-sm sticky top-28">
+<h3 class="text-lg font-bold text-slate-800 dark:text-slate-100 mb-5 pb-4 border-b border-slate-100 dark:border-slate-800">Preferences</h3>
+<div class="flex flex-col gap-6">
+<div class="flex flex-col gap-2">
+<label class="text-sm font-bold text-slate-700 dark:text-slate-300">Current Location</label>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-slate-400 group-focus-within:text-primary transition-colors text-[20px]">location_on</span>
+<input class="w-full pl-10 pr-3 py-2.5 bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700 rounded-lg text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all" type="text" value="San Francisco, CA"/>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-sm font-bold text-slate-700 dark:text-slate-300">Willing to Relocate</label>
+<label class="flex items-center cursor-pointer relative select-none p-3 border border-slate-100 dark:border-slate-800 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary/30 rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[16px] after:left-[16px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+<span class="ml-3 text-sm font-medium text-slate-700 dark:text-slate-300">Yes, open to it</span>
+</label>
+</div>
+<hr class="border-slate-100 dark:border-slate-800"/>
+<div class="flex flex-col gap-3">
+<label class="text-sm font-bold text-slate-700 dark:text-slate-300">Platform Whitelist</label>
+<p class="text-xs text-slate-500 dark:text-slate-400 mb-1">Select where you want your profile to be visible.</p>
+<label class="flex items-center gap-3 p-2.5 rounded-lg border border-transparent hover:border-slate-200 dark:hover:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800/50 cursor-pointer transition-all">
+<input checked="" class="w-4 h-4 text-primary bg-slate-100 border-slate-300 rounded focus:ring-primary dark:ring-offset-slate-800 dark:bg-slate-700 dark:border-slate-600" type="checkbox"/>
+<span class="text-sm text-slate-700 dark:text-slate-300 font-medium">LinkedIn Integration</span>
+</label>
+<label class="flex items-center gap-3 p-2.5 rounded-lg border border-transparent hover:border-slate-200 dark:hover:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800/50 cursor-pointer transition-all">
+<input checked="" class="w-4 h-4 text-primary bg-slate-100 border-slate-300 rounded focus:ring-primary dark:ring-offset-slate-800 dark:bg-slate-700 dark:border-slate-600" type="checkbox"/>
+<span class="text-sm text-slate-700 dark:text-slate-300 font-medium">Indeed</span>
+</label>
+<label class="flex items-center gap-3 p-2.5 rounded-lg border border-transparent hover:border-slate-200 dark:hover:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800/50 cursor-pointer transition-all">
+<input class="w-4 h-4 text-primary bg-slate-100 border-slate-300 rounded focus:ring-primary dark:ring-offset-slate-800 dark:bg-slate-700 dark:border-slate-600" type="checkbox"/>
+<span class="text-sm text-slate-700 dark:text-slate-300 font-medium">AngelList</span>
+</label>
+</div>
+<div class="pt-4 mt-2">
+<button class="w-full bg-primary hover:bg-primary-dark text-white font-bold py-3.5 px-4 rounded-xl shadow-lg shadow-blue-600/20 hover:shadow-blue-600/30 transition-all transform active:scale-[0.98] flex items-center justify-center gap-2">
+                                Confirm Profile
+                                <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+<p class="text-center text-xs text-slate-400 mt-3">This will generate your personalized roadmaps.</p>
+</div>
+</div>
+</div>
+</aside>
+</div>
+</main>
+</div>
+
+</body></html>

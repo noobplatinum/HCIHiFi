@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Roadmaply - Job Analysis</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "primary-dark": "#0f6bd0",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"],
+                        "body": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display flex flex-col min-h-screen overflow-hidden">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-6 py-3 shrink-0 z-20">
+<div class="flex items-center gap-4 text-slate-900 dark:text-slate-100">
+<div class="size-8 text-primary">
+<span class="material-symbols-outlined text-[32px]">rocket_launch</span>
+</div>
+<h2 class="text-slate-900 dark:text-white text-xl font-bold leading-tight tracking-tight">Roadmaply</h2>
+</div>
+<div class="hidden md:flex flex-1 justify-end gap-8 items-center">
+<nav class="flex items-center gap-6">
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm font-medium leading-normal transition-colors" href="#">Dashboard</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm font-medium leading-normal transition-colors" href="#">Career Roadmap</a>
+<a class="text-primary font-bold text-sm leading-normal" href="#">Job Board</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm font-medium leading-normal transition-colors" href="#">Profile</a>
+</nav>
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-9 px-4 bg-primary hover:bg-primary-dark text-white text-sm font-bold leading-normal transition-colors">
+<span class="truncate">Upgrade Plan</span>
+</button>
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-9 border border-slate-200 dark:border-slate-700" data-alt="User profile picture placeholder" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCq99ihbg7iFJbO6ZgC3zgDaq8H6FG8L-YaaMWpRESVrabtEr6HlXzK0zEWlYwZ0XrtXX0XBqdpdCLRTZx7sIv6CJiQPuaSJ5Oyvp51YCHbjXnbjpoIi9ZPj_cDomJ-MtzqBTBfzezYpO-YXyq56gP8OW8eR6F9O_DxxlpY69dzJCf23VaKFEkL0zI-AxPyZ9jtMzA7G-7TzUrRLwl3VPvRn12hjEQReRjpZJ5DiMTn2_5j9iPO2GgnjMRTVwAHWgzaKrHxRbTwa2ur");'></div>
+</div>
+</header>
+<div class="flex flex-1 overflow-hidden">
+<aside class="w-64 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 flex-col justify-between hidden lg:flex shrink-0 z-10">
+<div class="flex flex-col gap-4 p-4">
+<div class="flex gap-3 items-center mb-2">
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-10 border border-slate-100 dark:border-slate-700 shadow-sm" data-alt="AI assistant avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBSP0J-27YugABGkhU97T9kAAx3lR-ariTxumM_m6gTO82j_wGC8FSY3pT9HyFt1bHvdd8X4Y6LhYemoh52NIQwOdsMNi68BsGxT1yJGnC4qSSAlrKhLHQHBZMda0UZgvNZ0f9Ifwaz7CH_zfa7IbDXyvCXGvof6YxGWv4E6I6JT2Cuz2tLyCbHMPhduPkF6046F4xfjZsvR9Eg8AmBNOHspqGhrm3c0Ncj7vUpzttnS8-UHFds4ChERnCdEnercH-1ik8Zmk2DYbGS");'></div>
+<div class="flex flex-col">
+<h1 class="text-slate-900 dark:text-white text-base font-bold leading-tight">Career Guide</h1>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-normal">AI Assistant Active</p>
+</div>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-primary transition-all group" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary">dashboard</span>
+<span class="text-sm font-medium">Overview</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-primary transition-all group" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary">map</span>
+<span class="text-sm font-medium">My Roadmap</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary dark:bg-primary/20" href="#">
+<span class="material-symbols-outlined text-primary fill-1">work</span>
+<span class="text-sm font-bold">Job Analysis</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-primary transition-all group" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary">description</span>
+<span class="text-sm font-medium">Applications</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-primary transition-all group" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary">settings</span>
+<span class="text-sm font-medium">Settings</span>
+</a>
+</nav>
+</div>
+<div class="p-4 border-t border-slate-200 dark:border-slate-800">
+<div class="bg-gradient-to-br from-primary/10 to-blue-200/20 dark:from-primary/20 dark:to-blue-900/20 rounded-xl p-4">
+<p class="text-xs font-semibold text-primary mb-2">Weekly Goal</p>
+<div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-1.5 mb-2">
+<div class="bg-primary h-1.5 rounded-full" style="width: 75%"></div>
+</div>
+<p class="text-xs text-slate-500 dark:text-slate-400">15/20 jobs analyzed</p>
+</div>
+</div>
+</aside>
+<main class="flex-1 flex overflow-hidden relative">
+<div class="w-full lg:w-[45%] xl:w-[40%] flex flex-col border-r border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0b1219]">
+<div class="p-5 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 sticky top-0 z-10 shadow-sm">
+<div class="flex justify-between items-center mb-4">
+<h2 class="text-slate-900 dark:text-white text-xl font-bold">Curated Matches</h2>
+<span class="text-xs font-semibold bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 px-2 py-1 rounded-full border border-blue-100 dark:border-blue-900/50">12 New</span>
+</div>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[20px]">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-slate-100 dark:bg-slate-800 border-none rounded-lg text-sm text-slate-700 dark:text-slate-200 focus:ring-2 focus:ring-primary placeholder-slate-400" placeholder="Filter by title, company, or skills..." type="text"/>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto custom-scrollbar p-4 space-y-4">
+<div class="group relative bg-white dark:bg-slate-900 rounded-xl p-4 shadow-[0_0_0_2px_rgba(19,127,236,1)] cursor-pointer transition-all">
+<div class="flex justify-between items-start mb-3">
+<div class="flex gap-3">
+<div class="w-12 h-12 rounded-lg bg-slate-100 dark:bg-slate-800 flex items-center justify-center p-2 shrink-0">
+<img alt="Google Logo" class="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCG88ePU7Ml69fXQ-2bjWGPTziFp9B-r-Jxywp9R7DjygPY73GdoR91eu5XZgSqW5rB0Pw6jFS9VVE47V9qUDiEjyaiLLyffaj9vKGc5Nq3Bl3ocF76bnowdflAdickqQLT4UiU0qxBFX8YrX1PefvaYNfXljp6vnlpHKvVCFdc4gp20ETalE1QA-6ZlQJqpKy_67nIMvtwbZne916651E_EwNLn7-Jz7No6VM8_czm6gM02zX_sJdR1hv_65rsRcEIsYgLmVWrDYOK"/>
+</div>
+<div>
+<h3 class="text-slate-900 dark:text-white font-bold text-base">Senior UX Engineer</h3>
+<p class="text-slate-500 dark:text-slate-400 text-sm">Google • Remote possible</p>
+</div>
+</div>
+<div class="flex flex-col items-end gap-1">
+<span class="bg-primary text-white text-xs font-bold px-2 py-1 rounded-md">98% Match</span>
+<span class="text-slate-400 text-xs flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> LinkedIn
+                            </span>
+</div>
+</div>
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="text-xs bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 px-2 py-1 rounded-md border border-slate-200 dark:border-slate-700">React</span>
+<span class="text-xs bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 px-2 py-1 rounded-md border border-slate-200 dark:border-slate-700">TypeScript</span>
+<span class="text-xs bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 px-2 py-1 rounded-md border border-slate-200 dark:border-slate-700">$180k - $240k</span>
+</div>
+<div class="flex items-center justify-between mt-2 pt-3 border-t border-slate-100 dark:border-slate-800">
+<div class="flex gap-2">
+<button class="p-1.5 rounded-full text-slate-400 hover:text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" title="Irrelevant">
+<span class="material-symbols-outlined text-[20px]">thumb_down</span>
+</button>
+<button class="p-1.5 rounded-full text-slate-400 hover:text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" title="Closed Position">
+<span class="material-symbols-outlined text-[20px]">block</span>
+</button>
+</div>
+<button class="bg-primary hover:bg-primary-dark text-white text-xs font-bold py-2 px-4 rounded-lg flex items-center gap-1 transition-colors">
+                            Apply Now
+                            <span class="material-symbols-outlined text-[16px]">open_in_new</span>
+</button>
+</div>
+</div>
+<div class="group relative bg-white dark:bg-slate-900 rounded-xl p-4 border border-slate-200 dark:border-slate-800 hover:border-primary/50 cursor-pointer transition-all">
+<div class="flex justify-between items-start mb-3">
+<div class="flex gap-3">
+<div class="w-12 h-12 rounded-lg bg-slate-100 dark:bg-slate-800 flex items-center justify-center p-2 shrink-0">
+<div class="w-8 h-8 rounded bg-slate-700 flex items-center justify-center text-white font-bold text-xs">S</div>
+</div>
+<div>
+<h3 class="text-slate-900 dark:text-white font-bold text-base">Product Designer</h3>
+<p class="text-slate-500 dark:text-slate-400 text-sm">Stripe • San Francisco</p>
+</div>
+</div>
+<div class="flex flex-col items-end gap-1">
+<span class="bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 border border-blue-100 dark:border-blue-900/50 text-xs font-bold px-2 py-1 rounded-md">92% Match</span>
+<span class="text-slate-400 text-xs flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> JobStreet
+                            </span>
+</div>
+</div>
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="text-xs bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 px-2 py-1 rounded-md border border-slate-200 dark:border-slate-700">Figma</span>
+<span class="text-xs bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 px-2 py-1 rounded-md border border-slate-200 dark:border-slate-700">Design Systems</span>
+</div>
+<div class="flex items-center justify-between mt-2 pt-3 border-t border-slate-100 dark:border-slate-800">
+<div class="flex gap-2">
+<button class="p-1.5 rounded-full text-slate-400 hover:text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined text-[20px]">thumb_down</span>
+</button>
+<button class="p-1.5 rounded-full text-slate-400 hover:text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined text-[20px]">block</span>
+</button>
+</div>
+<button class="bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-900 dark:text-white text-xs font-bold py-2 px-4 rounded-lg flex items-center gap-1 transition-colors">
+                            Apply Now
+                            <span class="material-symbols-outlined text-[16px]">open_in_new</span>
+</button>
+</div>
+</div>
+<div class="group relative bg-white dark:bg-slate-900 rounded-xl p-4 border border-slate-200 dark:border-slate-800 hover:border-primary/50 cursor-pointer transition-all">
+<div class="flex justify-between items-start mb-3">
+<div class="flex gap-3">
+<div class="w-12 h-12 rounded-lg bg-slate-100 dark:bg-slate-800 flex items-center justify-center p-2 shrink-0">
+<div class="w-8 h-8 rounded bg-slate-800 flex items-center justify-center text-white font-bold text-xs">A</div>
+</div>
+<div>
+<h3 class="text-slate-900 dark:text-white font-bold text-base">Frontend Developer</h3>
+<p class="text-slate-500 dark:text-slate-400 text-sm">Airbnb • New York</p>
+</div>
+</div>
+<div class="flex flex-col items-end gap-1">
+<span class="bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 text-xs font-bold px-2 py-1 rounded-md">88% Match</span>
+<span class="text-slate-400 text-xs flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> LinkedIn
+                            </span>
+</div>
+</div>
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="text-xs bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 px-2 py-1 rounded-md border border-slate-200 dark:border-slate-700">Vue.js</span>
+<span class="text-xs bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 px-2 py-1 rounded-md border border-slate-200 dark:border-slate-700">GraphQL</span>
+</div>
+<div class="flex items-center justify-between mt-2 pt-3 border-t border-slate-100 dark:border-slate-800">
+<div class="flex gap-2">
+<button class="p-1.5 rounded-full text-slate-400 hover:text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined text-[20px]">thumb_down</span>
+</button>
+<button class="p-1.5 rounded-full text-slate-400 hover:text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined text-[20px]">block</span>
+</button>
+</div>
+<button class="bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-900 dark:text-white text-xs font-bold py-2 px-4 rounded-lg flex items-center gap-1 transition-colors">
+                            Apply Now
+                            <span class="material-symbols-outlined text-[16px]">open_in_new</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="hidden lg:flex flex-1 flex-col bg-white dark:bg-slate-950 overflow-y-auto custom-scrollbar">
+<div class="h-48 w-full relative shrink-0">
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
+<div class="absolute inset-0 bg-cover bg-center" data-alt="Office interior background" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB1tJfiUhl-EzJFLDByp32OMCL7m_zYEYUZNOOh7-hNtp07sRuspNW2MjVm_inWZE_PxhIKlEwzSwKR1K_z9wt692r7WY3va7zBR9ajrpDCYvMi5RcZ8giDzgewUKSjNWkqrUqhStjSQNLDSc4y8baVWo-2Ryh5vqsQcMJoFf0-cjJdv-rCGk_D8cEoXAcZciEUq2Yjxeg7gbJjk_JB2hOkGGwXfqSWUV3D48DijPf5l1adiVknvW2E5gl7wtZp6i_yx40N0qRbXbxT");'></div>
+<div class="absolute bottom-4 left-6 z-20 text-white">
+<div class="flex items-center gap-3 mb-2">
+<div class="bg-white p-1 rounded shadow-sm">
+<img alt="Google Logo" class="h-6 w-auto" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlcKv7KPyFBATvrumA2N_QNDMquB3g1AYOfxZOEGx9zhuMiUAKt3ZpPsVU7WODGqYiTFSIU1yfjM3WXZbgPPWFD25RYW-31ujJbs1oqM_djaaSHzhqAjSeSe8K-L-O1kYTE6qMisFOnDBauWqthWrg2dvo-lrA8MULX9VZlBttLDBTmx0M8pJYUTzsaZc4_ODkyasrzMSOe5RXVVdQhBIs02bBgMgzI7gAd_mUuq5HZZOJ7Orc9_wzcozIPItWE--yQQ0iarN9cgHr"/>
+</div>
+<h2 class="text-2xl font-bold">Google</h2>
+</div>
+<h1 class="text-3xl font-extrabold tracking-tight">Senior UX Engineer</h1>
+</div>
+</div>
+<div class="p-6 xl:p-8 flex flex-col gap-8">
+<section>
+<div class="flex items-center gap-4 mb-4">
+<div class="relative size-16 shrink-0">
+<svg class="size-full -rotate-90" viewBox="0 0 36 36">
+<path class="text-slate-200 dark:text-slate-800" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="3"></path>
+<path class="text-primary" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="98, 100" stroke-width="3"></path>
+</svg>
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-sm font-bold text-slate-900 dark:text-white">98%</div>
+</div>
+<div>
+<h3 class="text-lg font-bold text-slate-900 dark:text-white">Exceptional Match</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400">This role aligns perfectly with your "Senior Engineer" roadmap goals.</p>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-primary dark:text-blue-400">check_circle</span>
+<h4 class="font-bold text-sm text-slate-900 dark:text-white">Skills Verified</h4>
+</div>
+<p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                                Your profile confirms 8/9 key skills required, including <span class="font-semibold text-slate-900 dark:text-slate-200">React, Redux, and Node.js</span>.
+                            </p>
+</div>
+<div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-primary">trending_up</span>
+<h4 class="font-bold text-sm text-slate-900 dark:text-white">Growth Potential</h4>
+</div>
+<p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                                This role offers a 25% salary increase over your current estimate and leadership opportunities.
+                            </p>
+</div>
+</div>
+</section>
+<section>
+<h3 class="text-base font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">fact_check</span>
+                        Requirements Analysis
+                    </h3>
+<div class="space-y-3">
+<div class="flex items-center justify-between p-3 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center gap-3">
+<div class="bg-blue-50 dark:bg-blue-900/30 p-1.5 rounded text-primary dark:text-blue-400">
+<span class="material-symbols-outlined text-[18px]">check</span>
+</div>
+<span class="text-sm font-medium text-slate-900 dark:text-white">Advanced React Patterns</span>
+</div>
+<span class="text-xs font-semibold text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">Validated</span>
+</div>
+<div class="flex items-center justify-between p-3 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center gap-3">
+<div class="bg-blue-50 dark:bg-blue-900/30 p-1.5 rounded text-primary dark:text-blue-400">
+<span class="material-symbols-outlined text-[18px]">check</span>
+</div>
+<span class="text-sm font-medium text-slate-900 dark:text-white">TypeScript Proficiency</span>
+</div>
+<span class="text-xs font-semibold text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">Validated</span>
+</div>
+<div class="flex items-center justify-between p-3 rounded-lg bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 border-dashed">
+<div class="flex items-center gap-3">
+<div class="bg-slate-100 dark:bg-slate-800 p-1.5 rounded text-slate-500 dark:text-slate-400">
+<span class="material-symbols-outlined text-[18px]">priority_high</span>
+</div>
+<div class="flex flex-col">
+<span class="text-sm font-medium text-slate-900 dark:text-white">GraphQL Federation</span>
+<span class="text-xs text-slate-500 dark:text-slate-400">Not found in your current profile</span>
+</div>
+</div>
+<button class="text-xs font-bold text-primary hover:text-blue-700 dark:hover:text-blue-400 underline decoration-dotted">Add to Roadmap</button>
+</div>
+<div class="flex items-center justify-between p-3 rounded-lg bg-blue-50 dark:bg-blue-900/10 border border-blue-100 dark:border-blue-900/20">
+<div class="flex items-center gap-3">
+<div class="bg-white dark:bg-slate-900 p-1.5 rounded text-primary dark:text-blue-400 shadow-sm">
+<span class="material-symbols-outlined text-[18px]">star</span>
+</div>
+<div class="flex flex-col">
+<span class="text-sm font-medium text-slate-900 dark:text-white">Design Systems Experience</span>
+<span class="text-xs text-blue-700 dark:text-blue-400">Bonus match detected!</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<div class="mt-auto border-t border-slate-200 dark:border-slate-800 pt-6">
+<h4 class="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-3">Is this recommendation helpful?</h4>
+<div class="flex flex-wrap gap-3">
+<button class="flex items-center gap-2 px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 transition-colors text-sm font-medium group">
+<span class="material-symbols-outlined text-[18px] text-slate-400 group-hover:text-primary transition-colors">thumb_up</span>
+                            Good Match
+                        </button>
+<button class="flex items-center gap-2 px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 transition-colors text-sm font-medium group">
+<span class="material-symbols-outlined text-[18px] text-slate-400 group-hover:text-slate-600 transition-colors">thumb_down</span>
+                            Irrelevant
+                        </button>
+<button class="flex items-center gap-2 px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 transition-colors text-sm font-medium group">
+<span class="material-symbols-outlined text-[18px] text-slate-400 group-hover:text-slate-600 transition-colors">location_off</span>
+                            Wrong Location
+                        </button>
+<button class="flex items-center gap-2 px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 transition-colors text-sm font-medium group">
+<span class="material-symbols-outlined text-[18px] text-slate-400 group-hover:text-slate-600 transition-colors">money_off</span>
+                            Salary Mismatch
+                        </button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+</body></html>

@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Roadmaply AI CV Editor</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; }
+        /* Custom scrollbar for the split view */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: #cbd5e1;
+            border-radius: 20px;
+        }
+        .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: #334155;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 h-screen overflow-hidden flex">
+<!-- Sidebar -->
+<div class="w-64 flex-shrink-0 h-full bg-white dark:bg-[#1A2633] border-r border-slate-200 dark:border-slate-800 flex flex-col justify-between">
+<div class="flex flex-col gap-4 p-4">
+<div class="flex gap-3 items-center mb-4">
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-10 bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-2xl">rocket_launch</span>
+</div>
+<div class="flex flex-col">
+<h1 class="text-slate-900 dark:text-white text-base font-bold leading-normal">Roadmaply</h1>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-normal leading-normal">AI Career Guide</p>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors group" href="#">
+<span class="material-symbols-outlined text-slate-500 dark:text-slate-400 group-hover:text-primary transition-colors">dashboard</span>
+<p class="text-slate-700 dark:text-slate-300 text-sm font-medium">Dashboard</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/10 text-primary" href="#">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">description</span>
+<p class="text-primary text-sm font-medium">CV Validation</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors group" href="#">
+<span class="material-symbols-outlined text-slate-500 dark:text-slate-400 group-hover:text-primary transition-colors">map</span>
+<p class="text-slate-700 dark:text-slate-300 text-sm font-medium">Roadmap Gen</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors group" href="#">
+<span class="material-symbols-outlined text-slate-500 dark:text-slate-400 group-hover:text-primary transition-colors">work</span>
+<p class="text-slate-700 dark:text-slate-300 text-sm font-medium">Job Sources</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors group" href="#">
+<span class="material-symbols-outlined text-slate-500 dark:text-slate-400 group-hover:text-primary transition-colors">settings</span>
+<p class="text-slate-700 dark:text-slate-300 text-sm font-medium">Settings</p>
+</a>
+</div>
+</div>
+<div class="p-4 border-t border-slate-200 dark:border-slate-800">
+<div class="bg-blue-50 dark:bg-slate-800 p-3 rounded-xl">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-primary text-sm">auto_awesome</span>
+<p class="text-xs font-bold text-slate-700 dark:text-slate-200">AI Status</p>
+</div>
+<p class="text-xs text-slate-500 dark:text-slate-400">Parsing accuracy: <span class="text-green-600 font-bold">98%</span>. Please review critical fields.</p>
+</div>
+</div>
+</div>
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col h-full min-w-0 bg-background-light dark:bg-background-dark relative">
+<!-- Header -->
+<header class="h-16 flex items-center justify-between px-6 bg-white dark:bg-[#1A2633] border-b border-slate-200 dark:border-slate-800 flex-shrink-0 z-10">
+<div>
+<h2 class="text-lg font-bold text-slate-900 dark:text-white">Review Your Profile</h2>
+<p class="text-xs text-slate-500 dark:text-slate-400">Verify AI-parsed details from "Resume_John_Doe_2023.pdf"</p>
+</div>
+<div class="flex items-center gap-3">
+<button class="flex items-center gap-2 px-4 py-2 rounded-lg border border-slate-300 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 text-sm font-medium transition-colors">
+<span class="material-symbols-outlined text-sm">upload_file</span>
+                    Re-upload CV
+                </button>
+<div class="h-8 w-8 rounded-full bg-primary/20 text-primary flex items-center justify-center font-bold text-sm">JD</div>
+</div>
+</header>
+<!-- Split View Container -->
+<div class="flex-1 flex overflow-hidden">
+<!-- Left Side: PDF Preview (Static Representation) -->
+<div class="w-1/2 h-full bg-slate-100 dark:bg-slate-900 p-6 overflow-y-auto custom-scrollbar border-r border-slate-200 dark:border-slate-800 hidden lg:block">
+<div class="bg-white dark:bg-slate-800 shadow-sm rounded-xl min-h-[800px] w-full max-w-[600px] mx-auto p-8 relative">
+<!-- This represents the PDF visual -->
+<div class="absolute top-4 right-4 bg-slate-900/80 text-white text-xs px-2 py-1 rounded backdrop-blur-sm">Original PDF</div>
+<div class="flex justify-between items-start border-b border-slate-200 dark:border-slate-700 pb-6 mb-6">
+<div>
+<div class="h-8 w-48 bg-slate-200 dark:bg-slate-600 rounded mb-2"></div>
+<div class="h-4 w-32 bg-slate-100 dark:bg-slate-700 rounded"></div>
+</div>
+<div class="h-16 w-16 bg-slate-200 dark:bg-slate-600 rounded-full"></div>
+</div>
+<div class="space-y-6">
+<!-- Simulated Text Blocks -->
+<div class="space-y-2">
+<div class="h-4 w-24 bg-slate-300 dark:bg-slate-500 rounded"></div>
+<div class="h-3 w-full bg-slate-100 dark:bg-slate-700 rounded"></div>
+<div class="h-3 w-5/6 bg-slate-100 dark:bg-slate-700 rounded"></div>
+<div class="h-3 w-4/6 bg-slate-100 dark:bg-slate-700 rounded"></div>
+</div>
+<div class="space-y-2 pt-4">
+<div class="h-4 w-32 bg-slate-300 dark:bg-slate-500 rounded"></div>
+<div class="flex gap-4 mb-2">
+<div class="w-1 bg-primary/30 rounded-full"></div>
+<div class="flex-1 space-y-2">
+<div class="flex justify-between">
+<div class="h-3 w-32 bg-slate-200 dark:bg-slate-600 rounded"></div>
+<div class="h-3 w-16 bg-slate-200 dark:bg-slate-600 rounded"></div>
+</div>
+<div class="h-3 w-full bg-slate-100 dark:bg-slate-700 rounded"></div>
+<div class="h-3 w-full bg-slate-100 dark:bg-slate-700 rounded"></div>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="w-1 bg-primary/30 rounded-full"></div>
+<div class="flex-1 space-y-2">
+<div class="flex justify-between">
+<div class="h-3 w-32 bg-slate-200 dark:bg-slate-600 rounded"></div>
+<div class="h-3 w-16 bg-slate-200 dark:bg-slate-600 rounded"></div>
+</div>
+<div class="h-3 w-full bg-slate-100 dark:bg-slate-700 rounded"></div>
+</div>
+</div>
+</div>
+<div class="space-y-2 pt-4">
+<div class="h-4 w-20 bg-slate-300 dark:bg-slate-500 rounded"></div>
+<div class="flex flex-wrap gap-2">
+<div class="h-6 w-16 bg-slate-100 dark:bg-slate-700 rounded-full"></div>
+<div class="h-6 w-20 bg-slate-100 dark:bg-slate-700 rounded-full"></div>
+<div class="h-6 w-14 bg-slate-100 dark:bg-slate-700 rounded-full"></div>
+<div class="h-6 w-24 bg-slate-100 dark:bg-slate-700 rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Side: Editable Form -->
+<div class="w-full lg:w-1/2 h-full overflow-y-auto custom-scrollbar p-6 pb-24">
+<div class="max-w-[640px] mx-auto flex flex-col gap-8">
+<!-- Alert/Info -->
+<div class="bg-blue-50 dark:bg-primary/10 border border-blue-100 dark:border-primary/20 rounded-lg p-4 flex gap-3 items-start">
+<span class="material-symbols-outlined text-primary mt-0.5">info</span>
+<div>
+<h4 class="text-sm font-bold text-slate-900 dark:text-white">Review Mode Active</h4>
+<p class="text-sm text-slate-600 dark:text-slate-400 mt-1">Our AI has pre-filled these fields. Edit anything that looks incorrect to ensure the best roadmap generation.</p>
+</div>
+</div>
+<!-- Personal Info Section -->
+<section class="bg-white dark:bg-[#1A2633] rounded-xl p-6 shadow-sm border border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-2 mb-6 pb-2 border-b border-slate-100 dark:border-slate-700">
+<span class="material-symbols-outlined text-slate-400">person</span>
+<h3 class="text-lg font-bold text-slate-900 dark:text-white">Personal Information</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="flex flex-col gap-2">
+<label class="text-sm font-medium text-slate-700 dark:text-slate-300">Full Name</label>
+<input class="w-full rounded-lg border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-primary focus:border-primary p-2.5 text-sm" type="text" value="John Doe"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-sm font-medium text-slate-700 dark:text-slate-300">Current Job Title</label>
+<input class="w-full rounded-lg border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-primary focus:border-primary p-2.5 text-sm" type="text" value="Senior Product Designer"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-sm font-medium text-slate-700 dark:text-slate-300">Email Address</label>
+<input class="w-full rounded-lg border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-primary focus:border-primary p-2.5 text-sm" type="email" value="john.doe@example.com"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-sm font-medium text-slate-700 dark:text-slate-300">Location</label>
+<input class="w-full rounded-lg border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-primary focus:border-primary p-2.5 text-sm" type="text" value="San Francisco, CA"/>
+</div>
+</div>
+</section>
+<!-- Work Experience -->
+<section class="bg-white dark:bg-[#1A2633] rounded-xl p-6 shadow-sm border border-slate-200 dark:border-slate-800">
+<div class="flex items-center justify-between mb-6 pb-2 border-b border-slate-100 dark:border-slate-700">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-400">work_history</span>
+<h3 class="text-lg font-bold text-slate-900 dark:text-white">Work Experience</h3>
+</div>
+<button class="text-primary hover:text-blue-600 text-sm font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">add</span> Add Role
+                            </button>
+</div>
+<div class="relative pl-4 space-y-8 border-l-2 border-slate-200 dark:border-slate-700 ml-2">
+<!-- Experience Item 1 -->
+<div class="relative pl-6">
+<div class="absolute -left-[9px] top-1 h-4 w-4 rounded-full bg-white dark:bg-slate-800 border-2 border-primary"></div>
+<div class="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-lg border border-slate-200 dark:border-slate-700">
+<div class="flex justify-between items-start mb-3">
+<div class="w-full">
+<input class="font-bold text-slate-900 dark:text-white bg-transparent border-0 border-b border-transparent hover:border-slate-300 focus:border-primary focus:ring-0 p-0 w-full mb-1 text-base transition-colors" type="text" value="Senior Product Designer"/>
+<input class="text-sm text-slate-600 dark:text-slate-400 bg-transparent border-0 border-b border-transparent hover:border-slate-300 focus:border-primary focus:ring-0 p-0 w-full" type="text" value="TechFlow Inc."/>
+</div>
+<button class="text-slate-400 hover:text-red-500 transition-colors"><span class="material-symbols-outlined text-sm">delete</span></button>
+</div>
+<div class="flex gap-2 mb-3">
+<input class="w-24 text-xs p-1 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-600 rounded text-center" type="text" value="Jan 2021"/>
+<span class="text-slate-400 flex items-center">-</span>
+<input class="w-24 text-xs p-1 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-600 rounded text-center" type="text" value="Present"/>
+</div>
+<textarea class="w-full text-sm text-slate-600 dark:text-slate-300 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-600 rounded p-2 resize-none focus:ring-primary focus:border-primary" rows="3">Led design system overhaul increasing team velocity by 40%. Managed a team of 3 junior designers.</textarea>
+</div>
+</div>
+<!-- Experience Item 2 -->
+<div class="relative pl-6">
+<div class="absolute -left-[9px] top-1 h-4 w-4 rounded-full bg-white dark:bg-slate-800 border-2 border-slate-300 dark:border-slate-600"></div>
+<div class="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-lg border border-slate-200 dark:border-slate-700">
+<div class="flex justify-between items-start mb-3">
+<div class="w-full">
+<input class="font-bold text-slate-900 dark:text-white bg-transparent border-0 border-b border-transparent hover:border-slate-300 focus:border-primary focus:ring-0 p-0 w-full mb-1 text-base transition-colors" type="text" value="UX Designer"/>
+<input class="text-sm text-slate-600 dark:text-slate-400 bg-transparent border-0 border-b border-transparent hover:border-slate-300 focus:border-primary focus:ring-0 p-0 w-full" type="text" value="CreativAgency"/>
+</div>
+<button class="text-slate-400 hover:text-red-500 transition-colors"><span class="material-symbols-outlined text-sm">delete</span></button>
+</div>
+<div class="flex gap-2 mb-3">
+<input class="w-24 text-xs p-1 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-600 rounded text-center" type="text" value="Jun 2018"/>
+<span class="text-slate-400 flex items-center">-</span>
+<input class="w-24 text-xs p-1 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-600 rounded text-center" type="text" value="Dec 2020"/>
+</div>
+<textarea class="w-full text-sm text-slate-600 dark:text-slate-300 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-600 rounded p-2 resize-none focus:ring-primary focus:border-primary" rows="3">Designed mobile-first interfaces for fintech clients. Collaborated with developers to ensure pixel-perfect implementation.</textarea>
+</div>
+</div>
+</div>
+</section>
+<!-- Education -->
+<section class="bg-white dark:bg-[#1A2633] rounded-xl p-6 shadow-sm border border-slate-200 dark:border-slate-800">
+<div class="flex items-center justify-between mb-6 pb-2 border-b border-slate-100 dark:border-slate-700">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-400">school</span>
+<h3 class="text-lg font-bold text-slate-900 dark:text-white">Education</h3>
+</div>
+<button class="text-primary hover:text-blue-600 text-sm font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">add</span> Add
+                            </button>
+</div>
+<div class="grid grid-cols-1 gap-4">
+<div class="flex items-start gap-4 p-4 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-primary/50 transition-colors cursor-pointer group bg-slate-50 dark:bg-slate-800/50">
+<div class="bg-white dark:bg-slate-700 p-2 rounded-lg shadow-sm">
+<span class="material-symbols-outlined text-slate-500 dark:text-slate-300">account_balance</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between">
+<h4 class="font-bold text-slate-900 dark:text-white text-sm">Bachelor of Fine Arts, Interaction Design</h4>
+<span class="text-xs text-slate-500 bg-white dark:bg-slate-900 px-2 py-1 rounded border border-slate-200 dark:border-slate-600">2014 - 2018</span>
+</div>
+<p class="text-sm text-slate-600 dark:text-slate-400 mt-1">California College of the Arts</p>
+</div>
+<button class="opacity-0 group-hover:opacity-100 text-slate-400 hover:text-primary transition-all"><span class="material-symbols-outlined text-sm">edit</span></button>
+</div>
+</div>
+</section>
+<!-- Skills Matrix -->
+<section class="bg-white dark:bg-[#1A2633] rounded-xl p-6 shadow-sm border border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-2 mb-6 pb-2 border-b border-slate-100 dark:border-slate-700">
+<span class="material-symbols-outlined text-slate-400">psychology</span>
+<h3 class="text-lg font-bold text-slate-900 dark:text-white">Skills Matrix</h3>
+</div>
+<div class="space-y-6">
+<!-- Category 1 -->
+<div>
+<label class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-3 block">Technical Skills</label>
+<div class="flex flex-wrap gap-2">
+<div class="flex items-center gap-1 bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 px-3 py-1.5 rounded-full text-sm border border-blue-100 dark:border-blue-800/50">
+                                        Figma
+                                        <button class="hover:text-red-500 flex items-center justify-center"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</div>
+<div class="flex items-center gap-1 bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 px-3 py-1.5 rounded-full text-sm border border-blue-100 dark:border-blue-800/50">
+                                        Prototyping
+                                        <button class="hover:text-red-500 flex items-center justify-center"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</div>
+<div class="flex items-center gap-1 bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 px-3 py-1.5 rounded-full text-sm border border-blue-100 dark:border-blue-800/50">
+                                        HTML/CSS
+                                        <button class="hover:text-red-500 flex items-center justify-center"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</div>
+<input class="bg-transparent border-b border-slate-300 dark:border-slate-600 text-sm text-slate-600 dark:text-slate-400 w-24 focus:outline-none focus:border-primary px-1" placeholder="+ Add skill" type="text"/>
+</div>
+</div>
+<!-- Category 2 -->
+<div>
+<label class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-3 block">Soft Skills</label>
+<div class="flex flex-wrap gap-2">
+<div class="flex items-center gap-1 bg-purple-50 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 px-3 py-1.5 rounded-full text-sm border border-purple-100 dark:border-purple-800/50">
+                                        Leadership
+                                        <button class="hover:text-red-500 flex items-center justify-center"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</div>
+<div class="flex items-center gap-1 bg-purple-50 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 px-3 py-1.5 rounded-full text-sm border border-purple-100 dark:border-purple-800/50">
+                                        Collaboration
+                                        <button class="hover:text-red-500 flex items-center justify-center"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</div>
+<input class="bg-transparent border-b border-slate-300 dark:border-slate-600 text-sm text-slate-600 dark:text-slate-400 w-24 focus:outline-none focus:border-primary px-1" placeholder="+ Add skill" type="text"/>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+</div>
+<!-- Sticky Footer Action -->
+<div class="absolute bottom-0 left-0 lg:left-0 right-0 p-4 bg-white/90 dark:bg-[#1A2633]/90 border-t border-slate-200 dark:border-slate-800 backdrop-blur-sm z-20 flex justify-end">
+<div class="flex gap-4 items-center">
+<p class="text-xs text-slate-500 dark:text-slate-400 hidden sm:block">By confirming, you agree to our data processing terms.</p>
+<button class="bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-800 dark:text-slate-200 px-6 py-3 rounded-xl font-bold text-sm transition-colors">
+                    Save Draft
+                </button>
+<button class="bg-primary hover:bg-blue-600 text-white px-8 py-3 rounded-xl font-bold text-sm shadow-lg shadow-blue-500/30 flex items-center gap-2 transition-all transform hover:scale-[1.02]">
+                    Confirm Profile &amp; Generate Roadmaps
+                    <span class="material-symbols-outlined text-lg">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</body></html>
