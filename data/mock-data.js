@@ -321,6 +321,12 @@ export const state = {
   selectedNode: null,
   completedNodes: new Set(['node-1', 'node-2']),
   feedbackPills: new Set(),
+  // API state flags
+  apiAvailable: false,
+  wozMode: false,
+  geminiConfigured: false,
+  aiParsed: false,
+  aiConfidence: null,
 };
 
 // Make state globally accessible

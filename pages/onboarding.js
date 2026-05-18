@@ -199,6 +199,9 @@ export function init() {
   const fileName = document.getElementById('file-name');
   const removeBtn = document.getElementById('remove-file-btn');
 
+  // Store selected file for API upload
+  let selectedFile = null;
+
   function showUploadedFile(name) {
     dropZone.classList.add('hidden');
     fileIndicator.classList.remove('hidden');
@@ -220,12 +223,14 @@ export function init() {
   dropZone.addEventListener('drop', (e) => {
     e.preventDefault();
     const file = e.dataTransfer?.files[0];
+    selectedFile = file || null;
     showUploadedFile(file ? file.name : 'John_Doe_CV_2023.pdf');
   });
 
   // File input change
   fileInput.addEventListener('change', () => {
     const file = fileInput.files[0];
+    selectedFile = file || null;
     showUploadedFile(file ? file.name : 'John_Doe_CV_2023.pdf');
   });
 
@@ -234,6 +239,7 @@ export function init() {
     fileIndicator.classList.add('hidden');
     dropZone.classList.remove('hidden');
     fileInput.value = '';
+    selectedFile = null;
     window.__roadmaply.state.cvUploaded = false;
   });
 
@@ -245,12 +251,61 @@ export function init() {
   const analyzeIcon = document.getElementById('analyze-icon');
   const analyzeLabel = document.getElementById('analyze-label');
 
-  analyzeBtn.addEventListener('click', () => {
+  analyzeBtn.addEventListener('click', async () => {
     analyzeBtn.disabled = true;
     analyzeBtn.classList.add('opacity-80');
     analyzeIcon.innerHTML = '<span class="spinner inline-block w-5 h-5 border-2 border-white border-t-transparent rounded-full"></span>';
     analyzeLabel.textContent = 'Analyzing…';
 
+    const api = window.__roadmaplyApi;
+
+    // Try to parse CV via backend API
+    if (api && api.isAvailable) {
+      try {
+        api.startTaskTimer('cv_upload_and_parse');
+        const result = await api.parseCv(selectedFile);
+
+        if (result) {
+          if (result.status === 'error') {
+            // AI parse failed — show error toast and redirect to manual input
+            window.showToast?.(
+              result.message || 'Sistem kesulitan membaca CV Anda. Silakan isi data secara manual.',
+              'error',
+              5000
+            );
+            api.endTaskTimer('cv_upload_and_parse', false);
+            setTimeout(() => { window.location.hash = '#/data-input'; }, 1500);
+            return;
+          }
+
+          if (result.status === 'partial') {
+            // Partial parse — warn user but continue
+            window.showToast?.(
+              result.message || 'AI berhasil membaca sebagian CV Anda. Silakan periksa dan lengkapi data.',
+              'warning',
+              5000
+            );
+          } else {
+            // Full success
+            const confidence = result.confidence || 0.98;
+            window.showToast?.(
+              `CV berhasil diproses! Akurasi: ${Math.round(confidence * 100)}%`,
+              'success',
+              3000
+            );
+          }
+
+          api.endTaskTimer('cv_upload_and_parse', true);
+          // Go to profile validation (AI-parsed data is already merged)
+          setTimeout(() => { window.location.hash = '#/profile-validation'; }, 800);
+          return;
+        }
+      } catch (err) {
+        console.warn('[Onboarding] API parse failed, using fallback:', err);
+      }
+    }
+
+    // Fallback: use mock data (original behaviour)
     setTimeout(() => {
       window.location.hash = '#/data-input';
     }, 1500);

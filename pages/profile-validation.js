@@ -312,12 +312,33 @@ export function init() {
   });
 
   // Confirm Profile CTA
-  document.getElementById('confirm-profile-btn')?.addEventListener('click', () => {
+  document.getElementById('confirm-profile-btn')?.addEventListener('click', async () => {
     const btn = document.getElementById('confirm-profile-btn');
     const label = document.getElementById('confirm-label');
     btn.disabled = true;
     btn.classList.add('opacity-80');
     label.textContent = 'Generating roadmaps…';
+
+    const api = window.__roadmaplyApi;
+
+    // Try to analyze career paths via backend API
+    if (api && api.isAvailable) {
+      try {
+        api.startTaskTimer('career_analysis');
+        const result = await api.analyzeCareer();
+
+        if (result && result.career_paths) {
+          window.showToast?.('Career paths generated successfully!', 'success');
+          api.endTaskTimer('career_analysis', true);
+          setTimeout(() => { window.location.hash = '#/career-comparison'; }, 600);
+          return;
+        }
+      } catch (err) {
+        console.warn('[ProfileValidation] API analysis failed, using fallback:', err);
+      }
+    }
+
+    // Fallback: use mock data (original behaviour)
     setTimeout(() => {
       window.location.hash = '#/career-comparison';
     }, 1200);

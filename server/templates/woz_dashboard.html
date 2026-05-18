@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Roadmaply — WoZ Facilitator Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Manrope', sans-serif;
+      background: #0f172a;
+      color: #e2e8f0;
+      min-height: 100vh;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      user-select: none;
+      vertical-align: middle;
+    }
+
+    /* Layout */
+    .dashboard { display: grid; grid-template-columns: 320px 1fr 340px; grid-template-rows: 64px 1fr; height: 100vh; }
+    .header { grid-column: 1 / -1; background: #1e293b; border-bottom: 1px solid #334155; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; }
+    .sidebar-left { background: #1e293b; border-right: 1px solid #334155; overflow-y: auto; padding: 16px; }
+    .main-panel { overflow-y: auto; padding: 24px; }
+    .sidebar-right { background: #1e293b; border-left: 1px solid #334155; overflow-y: auto; padding: 16px; }
+
+    /* Header */
+    .logo { display: flex; align-items: center; gap: 8px; }
+    .logo span:first-child { color: #818cf8; font-size: 28px; }
+    .logo-text { font-weight: 800; font-size: 18px; color: #f1f5f9; }
+    .logo-sub { font-size: 11px; color: #94a3b8; background: #334155; padding: 2px 8px; border-radius: 6px; margin-left: 8px; }
+    .session-controls { display: flex; gap: 8px; align-items: center; }
+
+    /* Cards */
+    .card { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 16px; margin-bottom: 12px; }
+    .card-header { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; font-weight: 700; font-size: 13px; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; }
+    .card-header .material-symbols-outlined { font-size: 18px; color: #818cf8; }
+
+    /* Status indicators */
+    .status-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+    .status-active { background: #22c55e; box-shadow: 0 0 8px rgba(34,197,94,0.5); animation: pulse 2s infinite; }
+    .status-idle { background: #64748b; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+    /* Buttons */
+    .btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 700; cursor: pointer; border: none; transition: all 0.15s; font-family: inherit; }
+    .btn:hover { transform: translateY(-1px); }
+    .btn:active { transform: scale(0.97); }
+    .btn-primary { background: #818cf8; color: white; }
+    .btn-primary:hover { background: #6366f1; }
+    .btn-success { background: #22c55e; color: white; }
+    .btn-success:hover { background: #16a34a; }
+    .btn-warning { background: #f59e0b; color: #1e293b; }
+    .btn-warning:hover { background: #d97706; }
+    .btn-danger { background: #ef4444; color: white; }
+    .btn-danger:hover { background: #dc2626; }
+    .btn-outline { background: transparent; color: #94a3b8; border: 1px solid #475569; }
+    .btn-outline:hover { background: #334155; color: #e2e8f0; }
+    .btn-sm { padding: 6px 12px; font-size: 12px; }
+    .btn-block { width: 100%; justify-content: center; }
+
+    /* Pending requests */
+    .request-card { background: #0f172a; border: 1px solid #475569; border-radius: 10px; padding: 14px; margin-bottom: 10px; animation: slideIn 0.3s ease; }
+    .request-card.urgent { border-color: #f59e0b; box-shadow: 0 0 12px rgba(245,158,11,0.15); }
+    @keyframes slideIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .request-type { font-size: 11px; font-weight: 700; color: #818cf8; text-transform: uppercase; letter-spacing: 0.05em; }
+    .request-time { font-size: 11px; color: #64748b; }
+    .request-actions { display: flex; gap: 6px; margin-top: 10px; flex-wrap: wrap; }
+
+    /* Event log */
+    .event-item { display: flex; gap: 8px; padding: 8px 0; border-bottom: 1px solid #1e293b; font-size: 12px; }
+    .event-time { color: #64748b; font-family: monospace; min-width: 80px; flex-shrink: 0; }
+    .event-type { font-weight: 600; min-width: 100px; flex-shrink: 0; }
+    .event-type.page_change { color: #818cf8; }
+    .event-type.cv_upload { color: #22c55e; }
+    .event-type.cv_parse_result { color: #f59e0b; }
+    .event-type.task_start { color: #06b6d4; }
+    .event-type.task_end { color: #8b5cf6; }
+    .event-detail { color: #94a3b8; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+    /* Controls */
+    .control-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+    .control-label { font-size: 13px; font-weight: 600; color: #cbd5e1; }
+    .slider-wrap { display: flex; align-items: center; gap: 8px; }
+    input[type="range"] { -webkit-appearance: none; background: #334155; height: 6px; border-radius: 3px; outline: none; width: 120px; }
+    input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px; border-radius: 50%; background: #818cf8; cursor: grab; }
+    .slider-value { font-size: 13px; font-weight: 700; color: #818cf8; min-width: 36px; text-align: right; }
+
+    /* Toggle */
+    .toggle-wrap { display: flex; align-items: center; gap: 10px; cursor: pointer; }
+    .toggle { width: 40px; height: 22px; background: #475569; border-radius: 11px; position: relative; transition: 0.2s; }
+    .toggle.on { background: #22c55e; }
+    .toggle::after { content: ''; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; background: white; border-radius: 50%; transition: 0.2s; }
+    .toggle.on::after { left: 20px; }
+
+    /* Input */
+    .input { width: 100%; padding: 8px 12px; background: #0f172a; border: 1px solid #475569; border-radius: 8px; color: #e2e8f0; font-size: 13px; font-family: inherit; outline: none; transition: 0.15s; }
+    .input:focus { border-color: #818cf8; box-shadow: 0 0 0 2px rgba(129,140,248,0.15); }
+
+    /* Page tracker */
+    .page-indicator { display: flex; align-items: center; gap: 8px; padding: 10px 14px; background: #0f172a; border-radius: 10px; }
+    .page-indicator .material-symbols-outlined { color: #818cf8; font-size: 20px; }
+    .page-name { font-weight: 700; font-size: 14px; color: #f1f5f9; }
+
+    /* Empty state */
+    .empty-state { text-align: center; padding: 32px 16px; color: #64748b; }
+    .empty-state .material-symbols-outlined { font-size: 48px; color: #334155; display: block; margin: 0 auto 12px; }
+
+    /* Responsive fallback */
+    @media (max-width: 1200px) {
+      .dashboard { grid-template-columns: 1fr; grid-template-rows: 64px auto; }
+      .sidebar-left, .sidebar-right { border: none; border-top: 1px solid #334155; }
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard">
+    <!-- Header -->
+    <header class="header">
+      <div class="logo">
+        <span class="material-symbols-outlined">science</span>
+        <span class="logo-text">Roadmaply</span>
+        <span class="logo-sub">WoZ Facilitator</span>
+      </div>
+      <div class="session-controls">
+        <span class="status-dot" id="status-dot"></span>
+        <span id="session-status" style="font-size:13px;font-weight:600;color:#94a3b8;">Idle</span>
+        <input type="text" class="input" id="participant-id" placeholder="Participant ID" style="width:140px;"/>
+        <button class="btn btn-success btn-sm" id="start-btn" onclick="startSession()">
+          <span class="material-symbols-outlined" style="font-size:16px;">play_arrow</span> Start
+        </button>
+        <button class="btn btn-danger btn-sm" id="end-btn" onclick="endSession()" style="display:none;">
+          <span class="material-symbols-outlined" style="font-size:16px;">stop</span> End
+        </button>
+        <button class="btn btn-outline btn-sm" onclick="exportData()">
+          <span class="material-symbols-outlined" style="font-size:16px;">download</span> Export
+        </button>
+      </div>
+    </header>
+
+    <!-- Left Sidebar: Controls -->
+    <aside class="sidebar-left">
+      <!-- Current Page -->
+      <div class="card">
+        <div class="card-header"><span class="material-symbols-outlined">visibility</span> Participant View</div>
+        <div class="page-indicator">
+          <span class="material-symbols-outlined">web</span>
+          <span class="page-name" id="current-page">onboarding</span>
+        </div>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="card">
+        <div class="card-header"><span class="material-symbols-outlined">bolt</span> Quick Actions</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <button class="btn btn-danger btn-block btn-sm" onclick="triggerAction('force_error')">
+            <span class="material-symbols-outlined" style="font-size:16px;">error</span> Inject Error (CV Parse Fail)
+          </button>
+          <button class="btn btn-outline btn-block btn-sm" onclick="triggerAction('clear_error')">
+            <span class="material-symbols-outlined" style="font-size:16px;">check_circle</span> Clear Error Override
+          </button>
+        </div>
+      </div>
+
+      <!-- Confidence Control -->
+      <div class="card">
+        <div class="card-header"><span class="material-symbols-outlined">tune</span> AI Controls</div>
+        <div class="control-row">
+          <span class="control-label">Confidence</span>
+          <div class="slider-wrap">
+            <input type="range" min="0" max="100" value="100" id="confidence-slider" oninput="updateConfidence(this.value)"/>
+            <span class="slider-value" id="confidence-value">1.0×</span>
+          </div>
+        </div>
+        <div class="control-row">
+          <span class="control-label">Response Delay</span>
+          <div class="slider-wrap">
+            <input type="range" min="0" max="10" value="2" step="0.5" id="delay-slider" oninput="updateDelay(this.value)"/>
+            <span class="slider-value" id="delay-value">2.0s</span>
+          </div>
+        </div>
+        <div class="control-row" style="margin-bottom:0;">
+          <span class="control-label">Force Error Mode</span>
+          <div class="toggle-wrap" onclick="toggleForceError()">
+            <div class="toggle" id="force-error-toggle"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Templates -->
+      <div class="card">
+        <div class="card-header"><span class="material-symbols-outlined">description</span> Response Templates</div>
+        <div style="display:flex;flex-direction:column;gap:6px;font-size:12px;color:#94a3b8;">
+          <div><strong style="color:#22c55e;">cv_parse_success</strong> — Full parse, 98% confidence</div>
+          <div><strong style="color:#f59e0b;">cv_parse_partial</strong> — Partial parse, 62% confidence</div>
+          <div><strong style="color:#ef4444;">cv_parse_error</strong> — Complete parse failure</div>
+          <div><strong style="color:#22c55e;">career_analysis_success</strong> — 3 career paths</div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Panel: Pending Requests -->
+    <main class="main-panel">
+      <div class="card-header" style="margin-bottom:16px;font-size:16px;">
+        <span class="material-symbols-outlined" style="font-size:24px;">pending_actions</span>
+        Pending AI Requests
+        <span id="pending-count" style="background:#818cf8;color:white;padding:2px 8px;border-radius:10px;font-size:12px;margin-left:8px;">0</span>
+      </div>
+      <div id="pending-requests">
+        <div class="empty-state">
+          <span class="material-symbols-outlined">hourglass_empty</span>
+          <p>No pending requests.</p>
+          <p style="font-size:11px;margin-top:4px;">When the participant triggers an AI action, it will appear here.</p>
+        </div>
+      </div>
+    </main>
+
+    <!-- Right Sidebar: Event Log -->
+    <aside class="sidebar-right">
+      <div class="card-header"><span class="material-symbols-outlined">timeline</span> Live Event Log</div>
+      <div id="event-log" style="max-height: calc(100vh - 120px); overflow-y: auto;">
+        <div class="empty-state" style="padding:24px 8px;">
+          <span class="material-symbols-outlined" style="font-size:32px;">playlist_add</span>
+          <p style="font-size:12px;">Events will appear here as the participant interacts.</p>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <script>
+    // ─── State ───
+    let pollInterval = null;
+    let lastEventCount = 0;
+    let forceError = false;
+
+    // ─── API Helpers ───
+    async function api(path, method = 'GET', body = null) {
+      const opts = { method, headers: { 'Content-Type': 'application/json' } };
+      if (body) opts.body = JSON.stringify(body);
+      const res = await fetch(path, opts);
+      return res.json();
+    }
+
+    // ─── Session Controls ───
+    async function startSession() {
+      const pid = document.getElementById('participant-id').value || undefined;
+      await api('/api/woz/start', 'POST', { participant_id: pid });
+      document.getElementById('start-btn').style.display = 'none';
+      document.getElementById('end-btn').style.display = '';
+      document.getElementById('status-dot').className = 'status-dot status-active';
+      document.getElementById('session-status').textContent = 'Recording';
+      document.getElementById('session-status').style.color = '#22c55e';
+      startPolling();
+    }
+
+    async function endSession() {
+      await api('/api/woz/end', 'POST');
+      document.getElementById('start-btn').style.display = '';
+      document.getElementById('end-btn').style.display = 'none';
+      document.getElementById('status-dot').className = 'status-dot status-idle';
+      document.getElementById('session-status').textContent = 'Idle';
+      document.getElementById('session-status').style.color = '#94a3b8';
+      stopPolling();
+    }
+
+    // ─── Polling ───
+    function startPolling() {
+      if (pollInterval) clearInterval(pollInterval);
+      pollInterval = setInterval(pollState, 1000);
+      pollState();
+    }
+
+    function stopPolling() {
+      if (pollInterval) clearInterval(pollInterval);
+      pollInterval = null;
+    }
+
+    async function pollState() {
+      try {
+        const state = await api('/api/woz/state');
+        // Update current page
+        document.getElementById('current-page').textContent = state.current_page || 'unknown';
+        // Update pending requests
+        renderPendingRequests(state.pending_requests || []);
+        // Update events
+        if (state.events && state.events.length > lastEventCount) {
+          renderEvents(state.events);
+          lastEventCount = state.events.length;
+        }
+      } catch (e) {
+        console.warn('Poll error:', e);
+      }
+    }
+
+    // ─── Render Pending Requests ───
+    function renderPendingRequests(requests) {
+      const container = document.getElementById('pending-requests');
+      document.getElementById('pending-count').textContent = requests.length;
+      if (requests.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <span class="material-symbols-outlined">hourglass_empty</span>
+            <p>No pending requests.</p>
+            <p style="font-size:11px;margin-top:4px;">When the participant triggers an AI action, it will appear here.</p>
+          </div>`;
+        return;
+      }
+
+      container.innerHTML = requests.map(req => `
+        <div class="request-card urgent">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <span class="request-type">${req.type}</span>
+            <span class="request-time">${new Date(req.timestamp).toLocaleTimeString()}</span>
+          </div>
+          <div style="font-size:12px;color:#94a3b8;margin-bottom:8px;word-break:break-all;">
+            ${req.data_preview || 'No preview'}
+          </div>
+          <div class="request-actions">
+            ${getTemplateButtons(req)}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function getTemplateButtons(req) {
+      if (req.type === 'cv_parse') {
+        return `
+          <button class="btn btn-success btn-sm" onclick="respond('${req.request_id}','cv_parse_success')">✅ Success (98%)</button>
+          <button class="btn btn-warning btn-sm" onclick="respond('${req.request_id}','cv_parse_partial')">⚠️ Partial (62%)</button>
+          <button class="btn btn-danger btn-sm" onclick="respond('${req.request_id}','cv_parse_error')">❌ Error</button>
+        `;
+      }
+      if (req.type === 'career_analysis') {
+        return `
+          <button class="btn btn-success btn-sm" onclick="respond('${req.request_id}','career_analysis_success')">✅ 3 Career Paths</button>
+          <button class="btn btn-danger btn-sm" onclick="respond('${req.request_id}','cv_parse_error')">❌ Error</button>
+        `;
+      }
+      return `
+        <button class="btn btn-success btn-sm" onclick="respond('${req.request_id}','cv_parse_success')">✅ Success</button>
+        <button class="btn btn-danger btn-sm" onclick="respond('${req.request_id}','cv_parse_error')">❌ Error</button>
+      `;
+    }
+
+    async function respond(requestId, template) {
+      await api('/api/woz/respond', 'POST', { request_id: requestId, template });
+      pollState();
+    }
+
+    // ─── Render Events ───
+    function renderEvents(events) {
+      const container = document.getElementById('event-log');
+      const recentEvents = events.slice(-50).reverse();
+      container.innerHTML = recentEvents.map(evt => `
+        <div class="event-item">
+          <span class="event-time">${new Date(evt.time || evt.timestamp).toLocaleTimeString()}</span>
+          <span class="event-type ${evt.type}">${evt.type}</span>
+          <span class="event-detail">${evt.page || ''} ${JSON.stringify(evt.details || evt).substring(0, 80)}</span>
+        </div>
+      `).join('');
+    }
+
+    // ─── Quick Actions ───
+    async function triggerAction(action) {
+      await api('/api/woz/trigger', 'POST', { action });
+      if (action === 'force_error') {
+        forceError = true;
+        document.getElementById('force-error-toggle').classList.add('on');
+      } else if (action === 'clear_error') {
+        forceError = false;
+        document.getElementById('force-error-toggle').classList.remove('on');
+      }
+    }
+
+    function toggleForceError() {
+      forceError = !forceError;
+      triggerAction(forceError ? 'force_error' : 'clear_error');
+    }
+
+    async function updateConfidence(value) {
+      const multiplier = (value / 100).toFixed(2);
+      document.getElementById('confidence-value').textContent = multiplier + '×';
+      await api('/api/woz/trigger', 'POST', { action: 'set_confidence', multiplier: parseFloat(multiplier) });
+    }
+
+    async function updateDelay(value) {
+      document.getElementById('delay-value').textContent = value + 's';
+      await api('/api/woz/trigger', 'POST', { action: 'set_delay', delay: parseFloat(value) });
+    }
+
+    async function exportData() {
+      await api('/api/export/events');
+      await api('/api/export/sus');
+      alert('Data exported to server/exports/ directory.');
+    }
+
+    // Auto-start polling on page load (for convenience)
+    document.addEventListener('DOMContentLoaded', () => {
+      // Check current state
+      api('/api/woz/state').then(state => {
+        if (state.active) {
+          document.getElementById('start-btn').style.display = 'none';
+          document.getElementById('end-btn').style.display = '';
+          document.getElementById('status-dot').className = 'status-dot status-active';
+          document.getElementById('session-status').textContent = 'Recording';
+          document.getElementById('session-status').style.color = '#22c55e';
+          startPolling();
+        }
+      });
+    });
+  </script>
+</body>
+</html>

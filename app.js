@@ -12,6 +12,7 @@ const routes = {
   '/job-analysis':      () => import('./pages/job-analysis.js'),
   '/job-curation':      () => import('./pages/job-curation.js'),
   '/cv-editor':         () => import('./pages/cv-editor.js'),
+  '/sus-survey':        () => import('./pages/sus-survey.js'),
 };
 
 const app = document.getElementById('app');
