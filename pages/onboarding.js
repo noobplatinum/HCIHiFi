@@ -274,7 +274,7 @@ export function init() {
               5000
             );
             api.endTaskTimer('cv_upload_and_parse', false);
-            setTimeout(() => { window.location.hash = '#/data-input'; }, 1500);
+            setTimeout(() => { window.location.hash = '#/profile-validation'; }, 1500);
             return;
           }
 
@@ -305,9 +305,8 @@ export function init() {
       }
     }
 
-    // Fallback: use mock data (original behaviour)
     setTimeout(() => {
-      window.location.hash = '#/data-input';
+      window.location.hash = '#/profile-validation';
     }, 1500);
   });
 }

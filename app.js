@@ -3,7 +3,6 @@
 // Route → page module map
 const routes = {
   '/onboarding':        () => import('./pages/onboarding.js'),
-  '/data-input':        () => import('./pages/data-input.js'),
   '/profile-validation':() => import('./pages/profile-validation.js'),
   '/career-comparison': () => import('./pages/career-comparison.js'),
   '/detailed-analysis': () => import('./pages/detailed-analysis.js'),
