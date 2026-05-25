@@ -314,6 +314,7 @@ export const curatedJobs = [
 
 // App shared state (mutable)
 export const state = {
+  isAuthenticated: false,
   cvUploaded: false,
   currentPage: 'onboarding',
   selectedCareerPath: null,

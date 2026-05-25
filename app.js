@@ -2,6 +2,7 @@
 
 // Route → page module map
 const routes = {
+  '/login':             () => import('./pages/login.js'),
   '/onboarding':        () => import('./pages/onboarding.js'),
   '/profile-validation':() => import('./pages/profile-validation.js'),
   '/career-comparison': () => import('./pages/career-comparison.js'),
@@ -18,14 +19,14 @@ const app = document.getElementById('app');
 
 async function navigate(hash) {
   // Strip the leading # or #/
-  const route = hash.replace(/^#/, '') || '/onboarding';
+  const route = hash.replace(/^#/, '') || '/login';
   const normalised = route.startsWith('/') ? route : '/' + route;
 
   const loader = routes[normalised];
 
   if (!loader) {
-    // 404 fallback → redirect to onboarding
-    window.location.hash = '#/onboarding';
+    // 404 fallback → redirect to login
+    window.location.hash = '#/login';
     return;
   }
 
@@ -49,8 +50,8 @@ async function navigate(hash) {
         <span class="material-symbols-outlined text-5xl text-slate-300">error</span>
         <h2 class="text-xl font-bold text-slate-700">Page not found</h2>
         <p class="text-slate-500 text-sm">This page hasn't been built yet.</p>
-        <a href="#/onboarding" class="mt-2 px-6 py-2 bg-primary text-white rounded-lg font-bold text-sm hover:bg-primary-dark transition-colors">
-          Go to Onboarding
+        <a href="#/login" class="mt-2 px-6 py-2 bg-primary text-white rounded-lg font-bold text-sm hover:bg-primary-dark transition-colors">
+          Go to Login
         </a>
       </div>`;
     app.style.opacity = '1';
@@ -61,9 +62,9 @@ async function navigate(hash) {
 window.addEventListener('hashchange', () => navigate(window.location.hash));
 
 // Initial load
-const initialHash = window.location.hash || '#/onboarding';
+const initialHash = window.location.hash || '#/login';
 if (!window.location.hash) {
-  window.location.hash = '#/onboarding';
+  window.location.hash = '#/login';
 } else {
   navigate(initialHash);
 }

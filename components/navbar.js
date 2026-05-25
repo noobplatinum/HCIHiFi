@@ -48,9 +48,37 @@ export function renderNavbar(config = {}) {
       ${cta}
     </a>` : '';
 
-  const avatar = window.__roadmaply?.user?.avatar
-    ? `<img src="${window.__roadmaply.user.avatar}" alt="User avatar" class="size-9 rounded-full border-2 border-slate-100 hover:border-primary transition-colors object-cover cursor-pointer" />`
-    : `<div class="size-9 rounded-full bg-primary/10 border-2 border-primary/20 flex items-center justify-center text-primary font-bold text-sm cursor-pointer">JD</div>`;
+  const initials = window.__roadmaply?.user?.initials || 'JD';
+  const name = window.__roadmaply?.user?.name || 'John Doe';
+  const title = window.__roadmaply?.user?.title || 'Product Designer';
+
+  const avatar = `
+    <div class="relative" id="navbar-profile-menu">
+      <button id="navbar-avatar-btn" class="flex items-center focus:outline-none" aria-label="Profile menu">
+        ${window.__roadmaply?.user?.avatar
+          ? `<img src="${window.__roadmaply.user.avatar}" alt="User avatar" class="size-9 rounded-full border-2 border-slate-100 hover:border-primary transition-colors object-cover" />`
+          : `<div class="size-9 rounded-full bg-primary/10 border-2 border-primary/20 flex items-center justify-center text-primary font-bold text-sm">${initials}</div>`
+        }
+      </button>
+      
+      <!-- Dropdown menu -->
+      <div id="navbar-profile-dropdown" class="hidden absolute right-0 mt-2 w-48 bg-white border border-border-base rounded-xl shadow-lg py-1.5 text-slate-700 z-50 fade-in">
+        <div class="px-4 py-2 border-b border-border-base">
+          <p class="text-xs font-semibold text-slate-400">Signed in as</p>
+          <p class="text-sm font-bold text-slate-800 truncate">${name}</p>
+          <p class="text-[10px] text-slate-500 font-medium truncate">${title}</p>
+        </div>
+        <a href="#/cv-editor" class="flex items-center gap-2 px-4 py-2 text-sm hover:bg-slate-50 transition-colors font-semibold">
+          <span class="material-symbols-outlined text-slate-400 text-lg">person</span>
+          My Profile
+        </a>
+        <a href="#/login" id="navbar-signout-btn" class="flex items-center gap-2 px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors font-bold border-t border-border-base">
+          <span class="material-symbols-outlined text-red-500 text-lg">logout</span>
+          Sign Out
+        </a>
+      </div>
+    </div>
+  `;
 
   return `
   <header class="sticky top-0 z-50 bg-white border-b border-border-base shadow-sm">
@@ -81,3 +109,34 @@ export function renderNavbar(config = {}) {
 }
 
 window.renderNavbar = renderNavbar;
+
+// Global delegated click listener for avatar dropdown and sign out
+document.addEventListener('click', (e) => {
+  const dropdown = document.getElementById('navbar-profile-dropdown');
+  const avatarBtn = document.getElementById('navbar-avatar-btn');
+  
+  if (!dropdown || !avatarBtn) return;
+  
+  // Toggle dropdown on clicking avatar button
+  if (avatarBtn.contains(e.target) || avatarBtn === e.target) {
+    e.stopPropagation();
+    dropdown.classList.toggle('hidden');
+  } else if (!dropdown.contains(e.target)) {
+    // Clicked outside dropdown -> hide it
+    dropdown.classList.add('hidden');
+  }
+
+  // Handle Sign Out button click
+  const signOutBtn = document.getElementById('navbar-signout-btn');
+  if (signOutBtn && (signOutBtn.contains(e.target) || signOutBtn === e.target)) {
+    e.preventDefault();
+    if (window.__roadmaply && window.__roadmaply.state) {
+      window.__roadmaply.state.isAuthenticated = false;
+    }
+    dropdown.classList.add('hidden');
+    window.showToast?.('Signed out successfully.', 'info', 2000);
+    setTimeout(() => {
+      window.location.hash = '#/login';
+    }, 500);
+  }
+});
